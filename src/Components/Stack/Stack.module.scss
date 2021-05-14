@@ -1,0 +1,59 @@
+$scale: 1, 2, 3, 4, 5, 6, 7, 8;
+
+@each $unit in $scale {
+  $value: $unit * 8px;
+
+  .padding-#{$unit} {
+    padding: $value;
+  }
+
+  .paddingX-#{$unit} {
+    padding-left: $value;
+    padding-right: $value;
+  }
+
+  .paddingY-#{$unit} {
+    padding-top: $value;
+    padding-bottom: $value;
+  }
+
+  .paddingTop-#{$unit} {
+    padding-top: $value;
+  }
+
+  .paddingRight-#{$unit} {
+    padding-right: $value;
+  }
+
+  .paddingBottom-#{$unit} {
+    padding-bottom: $value;
+  }
+
+  .paddingLeft-#{$unit} {
+    padding-left: $value;
+  }
+
+  .vertical-#{$unit} {
+    // To not override any margin defined on children, we avoid using `> *:not(:last-child)`
+    // because this has a higher specificity (0.2.0) than a child with a class (0.1.0).
+    // Instead, we use the lobotomized owl selector which selects any element that has another element before it.
+    // https://pineco.de/get-to-know-the-lobotomized-owl-selector/
+    > * + * {
+      margin-top: $value;
+    }
+  }
+
+  .horizontal-#{$unit} {
+    // To not override any margin defined on children, we avoid using `> *:not(:last-child)`
+    // because this has a higher specificity (0.2.0) than a child with a class (0.1.0).
+    // Instead, we use the lobotomized owl selector which selects any element that has another element before it.
+    // https://pineco.de/get-to-know-the-lobotomized-owl-selector/
+    > * + * {
+      margin-left: $value;
+    }
+  }
+}
+
+.debug {
+  outline: 1px solid var(--genoma-color-primary-300);
+}
