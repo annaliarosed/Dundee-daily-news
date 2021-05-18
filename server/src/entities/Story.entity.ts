@@ -1,6 +1,6 @@
 import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
 import { ObjectType, Field } from "type-graphql";
-
+//TODO update fields add more
 @Entity()
 @ObjectType()
 export class Story {
@@ -20,3 +20,5 @@ export class Story {
   @Property({ type: "text" })
   title!: string;
 }
+
+// create: migration everytime the file is edited
