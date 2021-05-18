@@ -34,10 +34,25 @@ __decorate([
     __metadata("design:type", Object)
 ], Story.prototype, "updatedAt", void 0);
 __decorate([
-    type_graphql_1.Field(),
+    type_graphql_1.Field(() => String),
     core_1.Property({ type: "text" }),
     __metadata("design:type", String)
 ], Story.prototype, "title", void 0);
+__decorate([
+    type_graphql_1.Field(() => String),
+    core_1.Property({ type: "text" }),
+    __metadata("design:type", String)
+], Story.prototype, "storyText", void 0);
+__decorate([
+    type_graphql_1.Field(() => String),
+    core_1.Property({ type: "text" }),
+    __metadata("design:type", String)
+], Story.prototype, "category", void 0);
+__decorate([
+    type_graphql_1.Field(() => String),
+    core_1.Property({ type: "text" }),
+    __metadata("design:type", String)
+], Story.prototype, "author", void 0);
 Story = __decorate([
     core_1.Entity(),
     type_graphql_1.ObjectType()

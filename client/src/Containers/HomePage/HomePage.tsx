@@ -1,31 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { Stack } from "../../Components/Stack/Stack";
+import { useGetStoriesQuery } from "../../generated/graphql";
 import Header from "./Header";
-import { Story } from "./helpers";
 import styles from "./HomePage.module.scss";
 import StoryCard from "./StoryCard";
 
 const HomePage = () => {
-  const [stories, setStories] = useState<Story[]>([
-    {
-      id: "123",
-      title: "1st story",
-      imgUrl: "https://picsum.photos/200/500",
-      paragraph: "this is the 1st story",
-    },
-    {
-      id: "123",
-      title: "2nd story",
-      imgUrl: "https://picsum.photos/200/400",
-      paragraph: "this is the 2nd story",
-    },
-  ]);
+  const { data } = useGetStoriesQuery();
+  console.log(data, "ddata");
 
   return (
     <div className={styles.body}>
       <Header />
       <Stack gap={3} direction="vertical" align="center">
-        {stories.map((story) => (
+        {data?.stories.map((story) => (
           <StoryCard key={story.id} story={story} />
         ))}
       </Stack>

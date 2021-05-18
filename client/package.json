@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.3.18",
+    "@material-ui/core": "^4.11.4",
     "@mikro-orm/mysql": "^4.5.5",
-    "@shopify/polaris": "^6.4.0",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -12,12 +13,16 @@
     "@types/node": "^12.20.13",
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.5",
+    "apollo-client": "^2.6.10",
+    "apollo-graphql": "^0.9.2",
     "classnames": "^2.3.1",
+    "graphql": "^15.5.0",
     "lowdb": "^1.0.0",
     "pg": "^8.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
+    "react-hook-form": "^7.6.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "reflect-metadata": "^0.1.13",
@@ -29,7 +34,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "gen": "graphql-codegen --config codegen.yml",
+    "gen:watch": "graphql codegen --watch"
   },
   "eslintConfig": {
     "extends": [
@@ -50,6 +57,10 @@
     ]
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.21.4",
+    "@graphql-codegen/typescript": "1.22.0",
+    "@graphql-codegen/typescript-operations": "^1.17.16",
+    "@graphql-codegen/typescript-react-apollo": "2.2.4",
     "@types/react-helmet": "^6.1.1",
     "@types/react-router-dom": "^5.1.7"
   }

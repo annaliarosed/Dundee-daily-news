@@ -7,7 +7,7 @@ export default {
   migrations: {
     //TODO try the change to __dirname
     path: path.join(
-      "/Users/annaliadestefano/personal/dundee-daily-news",
+      "/Users/annaliadestefano/personal/dundee-daily-news/server/src",
       "./migrations"
     ),
     pattern: /^[\w-]+\d+\.[tj]s$/,

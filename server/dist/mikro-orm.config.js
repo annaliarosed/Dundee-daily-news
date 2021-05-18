@@ -8,7 +8,7 @@ const Story_entity_1 = require("./entities/Story.entity");
 const path_1 = __importDefault(require("path"));
 exports.default = {
     migrations: {
-        path: path_1.default.join("/Users/annaliadestefano/personal/dundee-daily-news", "./migrations"),
+        path: path_1.default.join("/Users/annaliadestefano/personal/dundee-daily-news/server/src", "./migrations"),
         pattern: /^[\w-]+\d+\.[tj]s$/,
     },
     entities: [Story_entity_1.Story],

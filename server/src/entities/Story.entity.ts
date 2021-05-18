@@ -16,9 +16,21 @@ export class Story {
   @Property({ type: "date", onUpdate: () => new Date() })
   updatedAt = new Date();
 
-  @Field()
+  @Field(() => String)
   @Property({ type: "text" })
   title!: string;
+
+  @Field(() => String)
+  @Property({ type: "text" })
+  storyText!: string;
+
+  @Field(() => String)
+  @Property({ type: "text" })
+  category: string;
+
+  @Field(() => String)
+  @Property({ type: "text" })
+  author!: string;
 }
 
 // create: migration everytime the file is edited

@@ -3,7 +3,7 @@ import { Stack } from "../../../Components/Stack/Stack";
 import { Story } from "../helpers";
 
 interface StoryCardProps {
-  story: Story;
+  story: any;
 }
 
 const StoryCard: React.FC<StoryCardProps> = ({ story }) => {
