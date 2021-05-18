@@ -1,7 +1,6 @@
 import { Story } from "../entities/Story.entity";
 import { MyContext } from "src/types";
 import { Resolver, Query, Ctx, Arg, Mutation } from "type-graphql";
-import { emit } from "process";
 
 //TODO Update resolvers
 
