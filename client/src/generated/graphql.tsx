@@ -54,6 +54,9 @@ export type Story = {
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
   title: Scalars['String'];
+  storyText: Scalars['String'];
+  category: Scalars['String'];
+  author: Scalars['String'];
 };
 
 export type GetStoriesQueryVariables = Exact<{ [key: string]: never; }>;
@@ -63,7 +66,7 @@ export type GetStoriesQuery = (
   { __typename?: 'Query' }
   & { stories: Array<(
     { __typename?: 'Story' }
-    & Pick<Story, 'id' | 'title'>
+    & Pick<Story, 'id' | 'title' | 'createdAt' | 'updatedAt' | 'storyText' | 'category' | 'author'>
   )> }
 );
 
@@ -73,6 +76,11 @@ export const GetStoriesDocument = gql`
   stories {
     id
     title
+    createdAt
+    updatedAt
+    storyText
+    category
+    author
   }
 }
     `;

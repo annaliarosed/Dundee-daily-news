@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomePage from "../HomePage";
 import AdminPage from "../AdminPage";
+import CreateStoryPage from "../CreateStoryPage";
 
 const ApplicationRouter = () => {
   return (
@@ -12,6 +13,9 @@ const ApplicationRouter = () => {
         </Route>
         <Route path="/admin">
           <AdminPage />
+        </Route>
+        <Route path="/create">
+          <CreateStoryPage />
         </Route>
       </Switch>
     </Router>

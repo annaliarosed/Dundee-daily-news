@@ -24,12 +24,12 @@ __decorate([
     __metadata("design:type", Number)
 ], Story.prototype, "id", void 0);
 __decorate([
-    type_graphql_1.Field(() => String),
+    type_graphql_1.Field(() => Number),
     core_1.Property({ type: "date" }),
     __metadata("design:type", Object)
 ], Story.prototype, "createdAt", void 0);
 __decorate([
-    type_graphql_1.Field(() => String),
+    type_graphql_1.Field(() => Number),
     core_1.Property({ type: "date", onUpdate: () => new Date() }),
     __metadata("design:type", Object)
 ], Story.prototype, "updatedAt", void 0);

@@ -8,11 +8,11 @@ export class Story {
   @PrimaryKey()
   id!: number;
 
-  @Field(() => String)
+  @Field(() => Number)
   @Property({ type: "date" })
   createdAt = new Date();
 
-  @Field(() => String)
+  @Field(() => Number)
   @Property({ type: "date", onUpdate: () => new Date() })
   updatedAt = new Date();
 

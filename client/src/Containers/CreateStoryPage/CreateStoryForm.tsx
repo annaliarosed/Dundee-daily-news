@@ -1,10 +1,10 @@
 import { TextField } from "@material-ui/core";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Stack } from "../../../Components/Stack/Stack";
-import styles from "./PostStoryForm.module.scss";
+import { Stack } from "../../Components/Stack/Stack";
+import styles from "./CreateStoryForm.module.scss";
 
-const PostStoryForm = () => {
+const CreateStoryForm = () => {
   const {
     formState: { errors },
   } = useForm();
@@ -13,11 +13,10 @@ const PostStoryForm = () => {
     <form className={styles.wrapper}>
       <Stack direction="vertical">
         <TextField variant="outlined" label="Title" />
-
         <TextField variant="outlined" label="paragraph" multiline rows={7} />
       </Stack>
     </form>
   );
 };
 
-export default PostStoryForm;
+export default CreateStoryForm;

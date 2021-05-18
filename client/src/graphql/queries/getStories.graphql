@@ -2,5 +2,10 @@ query GetStories {
   stories {
     id
     title
+    createdAt
+    updatedAt
+    storyText
+    category
+    author
   }
 }
