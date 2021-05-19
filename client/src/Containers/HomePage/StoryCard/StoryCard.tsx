@@ -1,6 +1,5 @@
 import React from "react";
 import { Stack } from "../../../Components/Stack/Stack";
-import { Story } from "../helpers";
 
 interface StoryCardProps {
   story: any;

@@ -1,0 +1,5 @@
+query getStory($id: Float!) {
+  story(id: $id) {
+    ...StorySnippet
+  }
+}

@@ -1,0 +1,12 @@
+fragment StorySnippet on Story {
+  id
+  createdAt
+  updatedAt
+  head
+  subHead
+  storyText
+  category
+  author
+  town
+  imgUrls
+}

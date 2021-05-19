@@ -1,21 +1,197 @@
-import { TextField } from "@material-ui/core";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { Stack } from "../../Components/Stack/Stack";
-import styles from "./CreateStoryForm.module.scss";
+import { TextField, Select, InputLabel, MenuItem } from "@material-ui/core";
 
+import React, { useState } from "react";
+import { Controller, FormProvider, useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+import { Stack } from "../../Components/Stack/Stack";
+import { useCreateStoryMutation } from "../../generated/graphql";
+import CreateConfirmationModal from "./CreateConfirmationModal";
+import styles from "./CreateStoryForm.module.scss";
+import CreateStoryFormFooter from "./CreateStoryFormFooter";
+import {
+  CategoryTypesOptions,
+  CreateStoryFormValues,
+  defaultValuesCreateForm,
+  TownTypesOptions,
+} from "./helpers";
+
+// TODO make default values
+// TODO decide data struucture
 const CreateStoryForm = () => {
+  const [createStory] = useCreateStoryMutation();
+  const history = useHistory();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const methods = useForm<CreateStoryFormValues>({
+    mode: "onChange",
+    reValidateMode: "onChange",
+    defaultValues: defaultValuesCreateForm,
+  });
+
   const {
-    formState: { errors },
-  } = useForm();
+    handleSubmit,
+    control,
+    reset,
+    getValues,
+    formState: { errors, dirtyFields },
+  } = methods;
+
+  const isDirty = Object.keys(dirtyFields).length !== 0;
+
+  const handleClear = () => {
+    reset();
+    console.log(getValues(), "here");
+  };
+  console.log("errors", errors);
+  const handleCreateStory = async (values: CreateStoryFormValues) => {
+    try {
+      await createStory({
+        variables: {
+          input: {
+            ...values,
+          },
+        },
+        update: (cache, { data: storyData }) => {
+          if (!storyData?.createStory) {
+            return;
+          }
+
+          cache.modify({
+            fields: {
+              stories(existingStories, { toReference }) {
+                return [...existingStories, toReference({ ...storyData })];
+              },
+            },
+          });
+        },
+      });
+
+      setIsModalOpen(false);
+      console.log("worked");
+      reset(values);
+      history.push("/admin");
+
+      // TODO add success state
+    } catch (err) {
+      // TODO add error state
+    }
+  };
+
   //TODO add dropZone
   return (
-    <form className={styles.wrapper}>
-      <Stack direction="vertical">
-        <TextField variant="outlined" label="Title" />
-        <TextField variant="outlined" label="paragraph" multiline rows={7} />
-      </Stack>
-    </form>
+    <FormProvider {...methods}>
+      <form
+        className={styles.wrapper}
+        onSubmit={handleSubmit(handleCreateStory)}
+      >
+        <Stack gap={1} direction="vertical">
+          <Controller
+            render={({ field }) => (
+              <TextField
+                {...field}
+                variant="outlined"
+                label="Head"
+                error={!!errors?.head?.message}
+                helperText={errors?.head?.message}
+              />
+            )}
+            rules={{ required: "must enter a header" }}
+            name="head"
+            control={control}
+          />
+
+          <Controller
+            render={({ field }) => (
+              <TextField {...field} variant="outlined" label="Sub Head" />
+            )}
+            name="subHead"
+            control={control}
+          />
+
+          <Controller
+            render={({ field }) => (
+              <TextField
+                {...field}
+                variant="outlined"
+                label="Story text"
+                error={!!errors?.storyText?.message}
+                helperText={errors?.storyText?.message}
+                multiline
+                rows={7}
+              />
+            )}
+            rules={{ required: "Must enter text" }}
+            name="storyText"
+            control={control}
+          />
+
+          <Controller
+            render={({ field }) => (
+              <TextField
+                {...field}
+                defaultValue="Erin Sauder"
+                variant="outlined"
+                label="Author"
+              />
+            )}
+            name="author"
+            control={control}
+          />
+
+          <Controller
+            render={({ field }) => (
+              <TextField {...field} variant="outlined" label="Images" />
+            )}
+            name="imgUrls"
+            control={control}
+          />
+
+          <Controller
+            control={control}
+            name="town"
+            defaultValue=""
+            rules={{ required: "Please choose a town" }}
+            render={({ field: { ref, ...rest } }) => (
+              <>
+                <InputLabel id="town-select">Town</InputLabel>
+                <Select {...rest} labelId="town-select">
+                  {TownTypesOptions.map(({ value, label }) => (
+                    <MenuItem value={value}>{label}</MenuItem>
+                  ))}
+                </Select>
+              </>
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="category"
+            defaultValue=""
+            rules={{ required: "Please choose a category" }}
+            render={({ field: { ref, ...rest } }) => (
+              <>
+                <InputLabel id="category-select">Category</InputLabel>
+                <Select {...rest} labelId="category-select">
+                  {CategoryTypesOptions.map(({ value, label }) => (
+                    <MenuItem value={value}>{label}</MenuItem>
+                  ))}
+                </Select>
+              </>
+            )}
+          />
+        </Stack>
+
+        {isDirty && (
+          <CreateStoryFormFooter
+            setIsOpen={setIsModalOpen}
+            onClear={handleClear}
+          />
+        )}
+
+        {isModalOpen && (
+          <CreateConfirmationModal setIsModalOpen={setIsModalOpen} />
+        )}
+      </form>
+    </FormProvider>
   );
 };
 

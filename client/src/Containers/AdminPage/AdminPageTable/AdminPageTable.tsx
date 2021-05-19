@@ -1,6 +1,5 @@
+import React from "react";
 import {
-  CircularProgress,
-  Snackbar,
   Table,
   TableBody,
   TableCell,
@@ -8,26 +7,17 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
-import { format } from "date-fns";
-import React from "react";
+
+import moment from "moment";
+
 import { Stack } from "../../../Components/Stack/Stack";
-import { useGetStoriesQuery } from "../../../generated/graphql";
+import { Stories } from "../../CreateStoryPage/helpers";
+import { Link } from "react-router-dom";
 
-const AdminPageTable = () => {
-  const { data, loading, error } = useGetStoriesQuery();
-
-  if (error) {
-    return <Snackbar message="This is an error message!" />;
-  }
-
-  if (loading || !data) {
-    return <CircularProgress />;
-  }
-
-  const { stories } = data;
-  // TODO figure out missing year
-  const test = format(stories[0].createdAt, "MMM Do");
-  console.log(test);
+interface AdminPageTableProps {
+  stories: Stories;
+}
+const AdminPageTable: React.FC<AdminPageTableProps> = ({ stories }) => {
   return (
     <>
       <h3>All stories:</h3>
@@ -43,12 +33,16 @@ const AdminPageTable = () => {
           <TableBody>
             {stories.map((story) => (
               <TableRow key={story.id}>
-                <TableCell>{test}</TableCell>
-                <TableCell>{story.title}</TableCell>
+                <TableCell>
+                  {moment(story.createdAt).format("MMMM Do YYYY")}
+                </TableCell>
+                <TableCell>{story.head}</TableCell>
                 <TableCell>{story.category}</TableCell>
                 <TableCell>
                   <Stack>
-                    <button>edit</button>
+                    <Link to={`/edit/${story.id}`}>
+                      <button>edit</button>
+                    </Link>
                     <button>delete</button>
                   </Stack>
                 </TableCell>

@@ -1,11 +1,32 @@
 import React from "react";
-import styles from "./AdminPage.module.scss";
-import { Button } from "@material-ui/core";
-import AdminPageTable from "./AdminPageTable/AdminPageTable";
+import { sort } from "ramda";
 import { Link } from "react-router-dom";
+import { Button, CircularProgress, Snackbar } from "@material-ui/core";
+
+import AdminPageTable from "./AdminPageTable/AdminPageTable";
+import { useGetStoriesQuery } from "../../generated/graphql";
+
+import styles from "./AdminPage.module.scss";
+import { StoryType } from "../CreateStoryPage/helpers";
 
 const AdminPage = () => {
-  // on click open form to add story
+  const { data, loading, error } = useGetStoriesQuery();
+
+  if (error) {
+    return <Snackbar message="This is an error message!" />;
+  }
+
+  if (loading || !data) {
+    return <CircularProgress />;
+  }
+
+  const { stories } = data;
+
+  const sortChronologically = (a: StoryType, b: StoryType): number => {
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  };
+
+  const sortedStories = sort(sortChronologically, stories);
 
   return (
     <div className={styles.wrapper}>
@@ -16,7 +37,7 @@ const AdminPage = () => {
         </Button>
       </Link>
 
-      <AdminPageTable />
+      <AdminPageTable stories={sortedStories} />
     </div>
   );
 };

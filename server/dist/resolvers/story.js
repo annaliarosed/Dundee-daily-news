@@ -24,6 +24,39 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.StoryResolver = void 0;
 const Story_entity_1 = require("../entities/Story.entity");
 const type_graphql_1 = require("type-graphql");
+let CreateStoryInput = class CreateStoryInput {
+};
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], CreateStoryInput.prototype, "head", void 0);
+__decorate([
+    type_graphql_1.Field({ nullable: true }),
+    __metadata("design:type", String)
+], CreateStoryInput.prototype, "subHead", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], CreateStoryInput.prototype, "storyText", void 0);
+__decorate([
+    type_graphql_1.Field({ nullable: true }),
+    __metadata("design:type", String)
+], CreateStoryInput.prototype, "category", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], CreateStoryInput.prototype, "author", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], CreateStoryInput.prototype, "town", void 0);
+__decorate([
+    type_graphql_1.Field(() => [String]),
+    __metadata("design:type", Array)
+], CreateStoryInput.prototype, "imgUrls", void 0);
+CreateStoryInput = __decorate([
+    type_graphql_1.InputType()
+], CreateStoryInput);
 let StoryResolver = class StoryResolver {
     stories(ctx) {
         return ctx.em.find(Story_entity_1.Story, {});
@@ -31,21 +64,21 @@ let StoryResolver = class StoryResolver {
     story(id, ctx) {
         return ctx.em.findOne(Story_entity_1.Story, { id });
     }
-    createStory(title, ctx) {
+    createStory(input, ctx) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newStory = ctx.em.create(Story_entity_1.Story, { title });
+            const newStory = ctx.em.create(Story_entity_1.Story, Object.assign({}, input));
             yield ctx.em.persistAndFlush(newStory);
             return newStory;
         });
     }
-    updateStory(id, title, ctx) {
+    updateStory(id, head, ctx) {
         return __awaiter(this, void 0, void 0, function* () {
             const updatedStory = yield ctx.em.findOne(Story_entity_1.Story, { id });
             if (!updatedStory) {
                 return null;
             }
-            if (typeof title !== "undefined") {
-                updatedStory.title = title;
+            if (typeof head !== "undefined") {
+                updatedStory.head = head;
                 yield ctx.em.persistAndFlush(updatedStory);
             }
             return updatedStory;
@@ -72,7 +105,7 @@ __decorate([
 ], StoryResolver.prototype, "stories", null);
 __decorate([
     type_graphql_1.Query(() => Story_entity_1.Story, { nullable: true }),
-    __param(0, type_graphql_1.Arg("id", () => String)),
+    __param(0, type_graphql_1.Arg("id", () => Number)),
     __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Object]),
@@ -80,16 +113,16 @@ __decorate([
 ], StoryResolver.prototype, "story", null);
 __decorate([
     type_graphql_1.Mutation(() => Story_entity_1.Story),
-    __param(0, type_graphql_1.Arg("title", () => String)),
+    __param(0, type_graphql_1.Arg("input", () => CreateStoryInput)),
     __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [CreateStoryInput, Object]),
     __metadata("design:returntype", Promise)
 ], StoryResolver.prototype, "createStory", null);
 __decorate([
     type_graphql_1.Mutation(() => Story_entity_1.Story, { nullable: true }),
     __param(0, type_graphql_1.Arg("id", () => String)),
-    __param(1, type_graphql_1.Arg("title", () => String, { nullable: true })),
+    __param(1, type_graphql_1.Arg("head", () => String, { nullable: true })),
     __param(2, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, String, Object]),

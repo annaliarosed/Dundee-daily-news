@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomePage from "../HomePage";
 import AdminPage from "../AdminPage";
 import CreateStoryPage from "../CreateStoryPage";
+import EditStoryPage from "../EditStoryPage";
 
 const ApplicationRouter = () => {
   return (
@@ -16,6 +17,10 @@ const ApplicationRouter = () => {
         </Route>
         <Route path="/create">
           <CreateStoryPage />
+        </Route>
+
+        <Route path="/edit/:id">
+          <EditStoryPage />
         </Route>
       </Switch>
     </Router>

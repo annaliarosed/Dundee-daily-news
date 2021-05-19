@@ -8,17 +8,21 @@ export class Story {
   @PrimaryKey()
   id!: number;
 
-  @Field(() => Number)
+  @Field(() => String)
   @Property({ type: "date" })
   createdAt = new Date();
 
-  @Field(() => Number)
+  @Field(() => String)
   @Property({ type: "date", onUpdate: () => new Date() })
   updatedAt = new Date();
 
   @Field(() => String)
   @Property({ type: "text" })
-  title!: string;
+  head!: string;
+
+  @Field(() => String)
+  @Property({ type: "text" })
+  subHead!: string;
 
   @Field(() => String)
   @Property({ type: "text" })
@@ -31,6 +35,14 @@ export class Story {
   @Field(() => String)
   @Property({ type: "text" })
   author!: string;
+
+  @Field(() => String)
+  @Property({ type: "text" })
+  town: string;
+
+  @Field(() => [String])
+  @Property({ type: "array", nullable: true })
+  imgUrls: string[];
 }
 
 // create: migration everytime the file is edited

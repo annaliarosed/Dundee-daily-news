@@ -24,12 +24,12 @@ __decorate([
     __metadata("design:type", Number)
 ], Story.prototype, "id", void 0);
 __decorate([
-    type_graphql_1.Field(() => Number),
+    type_graphql_1.Field(() => String),
     core_1.Property({ type: "date" }),
     __metadata("design:type", Object)
 ], Story.prototype, "createdAt", void 0);
 __decorate([
-    type_graphql_1.Field(() => Number),
+    type_graphql_1.Field(() => String),
     core_1.Property({ type: "date", onUpdate: () => new Date() }),
     __metadata("design:type", Object)
 ], Story.prototype, "updatedAt", void 0);
@@ -37,7 +37,12 @@ __decorate([
     type_graphql_1.Field(() => String),
     core_1.Property({ type: "text" }),
     __metadata("design:type", String)
-], Story.prototype, "title", void 0);
+], Story.prototype, "head", void 0);
+__decorate([
+    type_graphql_1.Field(() => String),
+    core_1.Property({ type: "text" }),
+    __metadata("design:type", String)
+], Story.prototype, "subHead", void 0);
 __decorate([
     type_graphql_1.Field(() => String),
     core_1.Property({ type: "text" }),
@@ -53,6 +58,16 @@ __decorate([
     core_1.Property({ type: "text" }),
     __metadata("design:type", String)
 ], Story.prototype, "author", void 0);
+__decorate([
+    type_graphql_1.Field(() => String),
+    core_1.Property({ type: "text" }),
+    __metadata("design:type", String)
+], Story.prototype, "town", void 0);
+__decorate([
+    type_graphql_1.Field(() => [String]),
+    core_1.Property({ type: "array", nullable: true }),
+    __metadata("design:type", Array)
+], Story.prototype, "imgUrls", void 0);
 Story = __decorate([
     core_1.Entity(),
     type_graphql_1.ObjectType()
