@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack } from "../../../Components/Stack/Stack";
+import { Stack } from "../../../../Components/Stack/Stack";
 import styles from "./DeleteConfirmationModal.module.scss";
 
 interface DeleteConfirmationModalProps {

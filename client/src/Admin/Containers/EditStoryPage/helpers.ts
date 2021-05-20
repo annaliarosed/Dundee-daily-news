@@ -1,4 +1,4 @@
-import { CategoryType, TownType } from "../../constants";
+import { CategoryType, TownType } from "../../../constants";
 
 export interface EditStoryFormValues {
   head: string;

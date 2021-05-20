@@ -1,7 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import React from "react";
 import Helmet from "react-helmet";
-import ApplicationRouter from "./Containers/ApplicationRouter";
+import ApplicationRouter from "./ApplicationRouter";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",

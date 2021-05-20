@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./CreateConfirmationModal.module.scss";
-import { Stack } from "../../Components/Stack/Stack";
+import { Stack } from "../../../Components/Stack/Stack";
 import cn from "classnames";
 
 interface CreateConfirmationModalProps {

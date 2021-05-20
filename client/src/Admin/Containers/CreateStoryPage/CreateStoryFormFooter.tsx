@@ -2,7 +2,7 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import { CreateStoryFormValues } from "./helpers";
 import styles from "./CreateStoryFormFooter.module.scss";
-import { Stack } from "../../Components/Stack/Stack";
+import { Stack } from "../../../Components/Stack/Stack";
 
 interface CreateStoryFormFooterProps {
   onClear: () => void;

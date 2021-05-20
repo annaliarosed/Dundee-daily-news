@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import HomePage from "../HomePage";
-import AdminPage from "../AdminPage";
-import CreateStoryPage from "../CreateStoryPage";
-import EditStoryPage from "../EditStoryPage";
+import HomePage from "../Public/HomePage";
+import AdminPage from "../Admin/Containers/AdminPage";
+import CreateStoryPage from "../Admin/Containers/CreateStoryPage";
+import EditStoryPage from "../Admin/Containers/EditStoryPage";
 
 const ApplicationRouter = () => {
   return (

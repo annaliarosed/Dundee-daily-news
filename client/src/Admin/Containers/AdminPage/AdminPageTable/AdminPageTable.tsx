@@ -11,7 +11,7 @@ import {
 
 import moment from "moment";
 
-import { Stack } from "../../../Components/Stack/Stack";
+import { Stack } from "../../../../Components/Stack/Stack";
 import { CategoryTypesMapping, StoryType } from "../../CreateStoryPage/helpers";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import styles from "./AdminPageTable.module.scss";

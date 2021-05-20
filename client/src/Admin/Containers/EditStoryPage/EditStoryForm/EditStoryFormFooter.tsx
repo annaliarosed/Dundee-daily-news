@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { Stack } from "../../../Components/Stack/Stack";
+import { Stack } from "../../../../Components/Stack/Stack";
 import { EditStoryFormValues } from "../helpers";
 import styles from "./EditStoryFormFooter.module.scss";
 

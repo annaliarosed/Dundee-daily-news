@@ -1,4 +1,4 @@
-import { CategoryType, TownType } from "../../constants";
+import { CategoryType, TownType } from "../../../constants";
 import { Story } from "../../generated/graphql";
 
 export type StoryType = {

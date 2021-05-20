@@ -3,7 +3,7 @@ import { TextField, Select, InputLabel, MenuItem } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { Stack } from "../../Components/Stack/Stack";
+import { Stack } from "../../../Components/Stack/Stack";
 import { useCreateStoryMutation } from "../../generated/graphql";
 import CreateConfirmationModal from "./CreateConfirmationModal";
 import styles from "./CreateStoryForm.module.scss";
