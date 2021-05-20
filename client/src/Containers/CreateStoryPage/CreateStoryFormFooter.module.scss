@@ -1,0 +1,24 @@
+.wrapper {
+  padding: 10px;
+  background-color: rgba(0, 159, 220, 0.2);
+}
+
+.saveButton {
+  color: #009fdc;
+  border: 1px solid #009fdc;
+
+  &:hover:not(:disabled) {
+    background-color: #009fdc;
+    color: white;
+  }
+}
+
+.cancelButton {
+  border: 1px solid #fd5858;
+  color: #fd5858;
+
+  &:hover {
+    background-color: #fd5858;
+    color: white;
+  }
+}

@@ -1,22 +1,6 @@
 import { CategoryType, TownType } from "../../constants";
 import { Story } from "../../generated/graphql";
 
-export type Stories = Array<
-  { __typename?: "Story" } & Pick<
-    Story,
-    | "id"
-    | "head"
-    | "subHead"
-    | "createdAt"
-    | "updatedAt"
-    | "storyText"
-    | "category"
-    | "author"
-    | "town"
-    | "imgUrls"
-  >
->;
-
 export type StoryType = {
   __typename?: "Story" | undefined;
 } & {

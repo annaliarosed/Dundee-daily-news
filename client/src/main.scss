@@ -2,3 +2,29 @@ body {
   margin: 0;
   box-sizing: border-box;
 }
+
+button {
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  min-width: 50px;
+  padding: 10px;
+  font-size: 15px;
+  transition: 0.5s;
+  cursor: pointer;
+
+  &:disabled {
+    background-color: #d2d2d2;
+    color: #a8a8a8;
+    border: 1px solid #a8a8a8;
+    cursor: not-allowed;
+  }
+
+  &:enabled:not(:disabled) {
+    &:hover,
+    &:focus {
+      font-size: 16px;
+      box-shadow: 20px 0px 63px -20px rgba(0, 0, 0, 1);
+    }
+  }
+}

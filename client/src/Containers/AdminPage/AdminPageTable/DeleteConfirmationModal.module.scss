@@ -17,29 +17,29 @@
   background-color: white;
   z-index: 1;
   border-radius: 15px;
-  border: 2px solid #009fdc;
+  border: 2px solid #dc0000e7;
 }
 
 .modalButton {
   margin: 10px;
 }
 
-.saveButton {
-  color: #009fdc;
-  border: 1px solid #009fdc;
+.deleteButton {
+  color: #dc0000e7;
+  border: 1px solid #dc0000e7;
 
   &:hover {
-    background-color: #009fdc;
+    background-color: #dc0000e7;
     color: white;
   }
 }
 
 .cancelButton {
-  border: 1px solid #fd5858;
-  color: #fd5858;
+  border: 1px solid #009fdc;
+  color: #009fdc;
 
   &:hover {
-    background-color: #fd5858;
+    background-color: #009fdc;
     color: white;
   }
 }

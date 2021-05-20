@@ -29,6 +29,24 @@ class CreateStoryInput {
   imgUrls!: string[];
 }
 
+@InputType()
+class UpdateStoryInput {
+  @Field()
+  head!: string;
+  @Field({ nullable: true })
+  subHead!: string;
+  @Field()
+  storyText!: string;
+  @Field({ nullable: true })
+  category!: string;
+  @Field()
+  author!: string;
+  @Field()
+  town!: string;
+  @Field(() => [String])
+  imgUrls!: string[];
+}
+
 @Resolver()
 export class StoryResolver {
   @Query(() => [Story])
@@ -58,28 +76,26 @@ export class StoryResolver {
     return newStory;
   }
 
-  @Mutation(() => Story, { nullable: true })
+  @Mutation(() => Story)
   async updateStory(
-    @Arg("id", () => String) id: number,
-    @Arg("head", () => String, { nullable: true }) head: string,
+    @Arg("id", () => Number) id: number,
+    @Arg("input", () => UpdateStoryInput) input: UpdateStoryInput,
     @Ctx() ctx: MyContext
-  ): Promise<Story | null> {
+  ): Promise<Story> {
     const updatedStory = await ctx.em.findOne(Story, { id });
     if (!updatedStory) {
-      return null;
+      throw new Error("Story not found!");
     }
 
-    if (typeof head !== "undefined") {
-      updatedStory.head = head;
-      await ctx.em.persistAndFlush(updatedStory);
-    }
+    Object.assign(updatedStory, input);
+    await ctx.em.persistAndFlush(updatedStory);
 
     return updatedStory;
   }
 
   @Mutation(() => Boolean)
   async deleteStory(
-    @Arg("id", () => String) id: number,
+    @Arg("id", () => Number) id: number,
     @Ctx() ctx: MyContext
   ): Promise<boolean> {
     try {

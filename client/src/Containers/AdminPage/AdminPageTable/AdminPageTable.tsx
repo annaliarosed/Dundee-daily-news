@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -11,13 +12,25 @@ import {
 import moment from "moment";
 
 import { Stack } from "../../../Components/Stack/Stack";
-import { Stories } from "../../CreateStoryPage/helpers";
-import { Link } from "react-router-dom";
+import { StoryType } from "../../CreateStoryPage/helpers";
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import styles from "./AdminPageTable.module.scss";
 
 interface AdminPageTableProps {
-  stories: Stories;
+  stories: StoryType[];
+  onDelete: (id: number) => Promise<void>;
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const AdminPageTable: React.FC<AdminPageTableProps> = ({ stories }) => {
+const AdminPageTable: React.FC<AdminPageTableProps> = ({
+  stories,
+  onDelete,
+  isModalOpen,
+  setIsModalOpen,
+}) => {
+  const [currentId, setCurrentId] = useState<number>(0);
+  // TODO change format of date to number?
+
   return (
     <>
       <h3>All stories:</h3>
@@ -34,16 +47,24 @@ const AdminPageTable: React.FC<AdminPageTableProps> = ({ stories }) => {
             {stories.map((story) => (
               <TableRow key={story.id}>
                 <TableCell>
-                  {moment(story.createdAt).format("MMMM Do YYYY")}
+                  {moment(Number(story.createdAt)).format("MMMM Do YYYY")}
                 </TableCell>
                 <TableCell>{story.head}</TableCell>
                 <TableCell>{story.category}</TableCell>
                 <TableCell>
                   <Stack>
                     <Link to={`/edit/${story.id}`}>
-                      <button>edit</button>
+                      <button className={styles.editButton}>edit</button>
                     </Link>
-                    <button>delete</button>
+                    <button
+                      className={styles.deleteButton}
+                      onClick={() => {
+                        setIsModalOpen(true);
+                        setCurrentId(story.id);
+                      }}
+                    >
+                      delete
+                    </button>
                   </Stack>
                 </TableCell>
               </TableRow>
@@ -51,6 +72,14 @@ const AdminPageTable: React.FC<AdminPageTableProps> = ({ stories }) => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      {isModalOpen && (
+        <DeleteConfirmationModal
+          id={currentId}
+          setIsModalOpen={setIsModalOpen}
+          onDelete={onDelete}
+        />
+      )}
     </>
   );
 };

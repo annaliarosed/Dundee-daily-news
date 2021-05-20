@@ -1,6 +1,15 @@
-.wrapper {
-  max-width: 450px;
+.form {
+  max-width: 700px;
   border: 1px solid black;
-  padding: 20px;
   margin: 0 auto;
+
+  &.editing {
+    border: 1px solid #009fdc;
+  }
+}
+
+.wrapper {
+  padding: 20px;
+  display: grid;
+  grid-gap: 20px;
 }

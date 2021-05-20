@@ -1,94 +1,70 @@
-import { TextField, Select, InputLabel, MenuItem } from "@material-ui/core";
-
-import React, { useEffect, useState } from "react";
+import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
+import React, { useEffect, useMemo } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
-import { Stack } from "../../Components/Stack/Stack";
-import { useCreateStoryMutation } from "../../generated/graphql";
-import CreateConfirmationModal from "./CreateConfirmationModal";
-import styles from "./CreateStoryForm.module.scss";
-import CreateStoryFormFooter from "./CreateStoryFormFooter";
-import cn from "classnames";
-
+import { Stack } from "../../../Components/Stack/Stack";
+import { Story } from "../../../generated/graphql";
 import {
   CategoryTypesOptions,
-  CreateStoryFormValues,
-  defaultValuesCreateForm,
   TownTypesOptions,
-} from "./helpers";
+} from "../../CreateStoryPage/helpers";
+import { EditStoryFormValues } from "../helpers";
+import EditStoryFormFooter from "./EditStoryFormFooter";
 
-// TODO make default values
-// TODO decide data struucture
-const CreateStoryForm = () => {
-  const [createStory] = useCreateStoryMutation();
-  const history = useHistory();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+interface EditStoryFormProps {
+  id: string;
+  story: Story;
+  onUpdate: (values: EditStoryFormValues, id: number) => Promise<void>;
+}
 
-  const methods = useForm<CreateStoryFormValues>({
+const EditStoryForm: React.FC<EditStoryFormProps> = ({
+  id,
+  story,
+  onUpdate,
+}) => {
+  // defaultValues update only when story updates
+  const defaultValues = useMemo(
+    () => ({
+      head: story.head,
+      subHead: story.subHead,
+      storyText: story.storyText,
+      author: story.author,
+      category: story.category,
+      town: story.town,
+      imgUrls: story.imgUrls,
+    }),
+    [story]
+  );
+
+  const methods = useForm<EditStoryFormValues>({
     mode: "onChange",
     reValidateMode: "onChange",
-    defaultValues: defaultValuesCreateForm,
+    defaultValues,
   });
 
   const {
     handleSubmit,
     control,
     reset,
-    getValues,
     formState: { errors, dirtyFields },
   } = methods;
 
+  useEffect(() => {
+    reset(defaultValues);
+  }, [reset, defaultValues]);
+
   const isDirty = Object.keys(dirtyFields).length !== 0;
 
-  const handleClear = () => {
-    reset();
-    console.log(getValues(), "here");
-  };
-  console.log("errors", errors);
-  const handleCreateStory = async (values: CreateStoryFormValues) => {
-    try {
-      await createStory({
-        variables: {
-          input: {
-            ...values,
-          },
-        },
-        update: (cache, { data: storyData }) => {
-          if (!storyData?.createStory) {
-            return;
-          }
-          const newStory = storyData.createStory;
+  const handleCancel = () => reset();
 
-          cache.modify({
-            fields: {
-              stories(existingStories, { toReference }) {
-                return [...existingStories, toReference({ ...newStory })];
-              },
-            },
-          });
-        },
-      });
-
-      setIsModalOpen(false);
-      console.log("worked");
-      reset(values);
-      history.push("/admin");
-
-      // TODO add success state
-    } catch (err) {
-      // TODO add error state
-    }
-  };
-
-  //TODO add dropZone
   return (
     <FormProvider {...methods}>
       <form
-        onSubmit={handleSubmit(handleCreateStory)}
-        className={cn(styles.form, { [styles.editing]: isDirty })}
+        onSubmit={handleSubmit((data) => onUpdate(data, story.id))}
+        style={{ maxWidth: "700px", margin: "70px auto" }}
       >
-        <div className={styles.wrapper}>
+        <Stack direction="vertical" gap={4}>
           <Controller
+            defaultValue={story?.head}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -102,8 +78,8 @@ const CreateStoryForm = () => {
             name="head"
             control={control}
           />
-
           <Controller
+            defaultValue={story?.subHead}
             render={({ field }) => (
               <TextField {...field} variant="outlined" label="Sub Head" />
             )}
@@ -112,6 +88,7 @@ const CreateStoryForm = () => {
           />
 
           <Controller
+            defaultValue={story?.storyText}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -129,10 +106,11 @@ const CreateStoryForm = () => {
           />
 
           <Controller
+            defaultValue={story?.author}
             render={({ field }) => (
               <TextField
                 {...field}
-                defaultValue="Erin Sauder"
+                //defaultValue="Erin Sauder"
                 variant="outlined"
                 label="Author"
               />
@@ -142,6 +120,7 @@ const CreateStoryForm = () => {
           />
 
           <Controller
+            defaultValue={story?.imgUrls}
             render={({ field }) => (
               <TextField {...field} variant="outlined" label="Images" />
             )}
@@ -150,9 +129,9 @@ const CreateStoryForm = () => {
           />
 
           <Controller
+            defaultValue={story?.town}
             control={control}
             name="town"
-            defaultValue=""
             rules={{ required: "Please choose a town" }}
             render={({ field: { ref, ...rest } }) => (
               <>
@@ -167,9 +146,9 @@ const CreateStoryForm = () => {
           />
 
           <Controller
+            defaultValue={story?.category}
             control={control}
             name="category"
-            defaultValue=""
             rules={{ required: "Please choose a category" }}
             render={({ field: { ref, ...rest } }) => (
               <>
@@ -182,20 +161,12 @@ const CreateStoryForm = () => {
               </>
             )}
           />
-        </div>
-        {isDirty && (
-          <CreateStoryFormFooter
-            setIsOpen={setIsModalOpen}
-            onClear={handleClear}
-          />
-        )}
+        </Stack>
 
-        {isModalOpen && (
-          <CreateConfirmationModal setIsModalOpen={setIsModalOpen} />
-        )}
+        {isDirty && <EditStoryFormFooter onCancel={handleCancel} />}
       </form>
     </FormProvider>
   );
 };
 
-export default CreateStoryForm;
+export default EditStoryForm;

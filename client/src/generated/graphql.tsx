@@ -27,7 +27,7 @@ export type CreateStoryInput = {
 export type Mutation = {
   __typename?: 'Mutation';
   createStory: Story;
-  updateStory?: Maybe<Story>;
+  updateStory: Story;
   deleteStory: Scalars['Boolean'];
 };
 
@@ -38,13 +38,13 @@ export type MutationCreateStoryArgs = {
 
 
 export type MutationUpdateStoryArgs = {
-  head?: Maybe<Scalars['String']>;
-  id: Scalars['String'];
+  input: UpdateStoryInput;
+  id: Scalars['Float'];
 };
 
 
 export type MutationDeleteStoryArgs = {
-  id: Scalars['String'];
+  id: Scalars['Float'];
 };
 
 export type Query = {
@@ -72,6 +72,16 @@ export type Story = {
   imgUrls: Array<Scalars['String']>;
 };
 
+export type UpdateStoryInput = {
+  head: Scalars['String'];
+  subHead?: Maybe<Scalars['String']>;
+  storyText: Scalars['String'];
+  category?: Maybe<Scalars['String']>;
+  author: Scalars['String'];
+  town: Scalars['String'];
+  imgUrls: Array<Scalars['String']>;
+};
+
 export type StorySnippetFragment = (
   { __typename?: 'Story' }
   & Pick<Story, 'id' | 'createdAt' | 'updatedAt' | 'head' | 'subHead' | 'storyText' | 'category' | 'author' | 'town' | 'imgUrls'>
@@ -85,6 +95,30 @@ export type CreateStoryMutationVariables = Exact<{
 export type CreateStoryMutation = (
   { __typename?: 'Mutation' }
   & { createStory: (
+    { __typename?: 'Story' }
+    & StorySnippetFragment
+  ) }
+);
+
+export type DeleteStoryMutationVariables = Exact<{
+  id: Scalars['Float'];
+}>;
+
+
+export type DeleteStoryMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'deleteStory'>
+);
+
+export type UpdateStoryMutationVariables = Exact<{
+  id: Scalars['Float'];
+  input: UpdateStoryInput;
+}>;
+
+
+export type UpdateStoryMutation = (
+  { __typename?: 'Mutation' }
+  & { updateStory: (
     { __typename?: 'Story' }
     & StorySnippetFragment
   ) }
@@ -161,6 +195,71 @@ export function useCreateStoryMutation(baseOptions?: Apollo.MutationHookOptions<
 export type CreateStoryMutationHookResult = ReturnType<typeof useCreateStoryMutation>;
 export type CreateStoryMutationResult = Apollo.MutationResult<CreateStoryMutation>;
 export type CreateStoryMutationOptions = Apollo.BaseMutationOptions<CreateStoryMutation, CreateStoryMutationVariables>;
+export const DeleteStoryDocument = gql`
+    mutation deleteStory($id: Float!) {
+  deleteStory(id: $id)
+}
+    `;
+export type DeleteStoryMutationFn = Apollo.MutationFunction<DeleteStoryMutation, DeleteStoryMutationVariables>;
+
+/**
+ * __useDeleteStoryMutation__
+ *
+ * To run a mutation, you first call `useDeleteStoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteStoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteStoryMutation, { data, loading, error }] = useDeleteStoryMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteStoryMutation(baseOptions?: Apollo.MutationHookOptions<DeleteStoryMutation, DeleteStoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteStoryMutation, DeleteStoryMutationVariables>(DeleteStoryDocument, options);
+      }
+export type DeleteStoryMutationHookResult = ReturnType<typeof useDeleteStoryMutation>;
+export type DeleteStoryMutationResult = Apollo.MutationResult<DeleteStoryMutation>;
+export type DeleteStoryMutationOptions = Apollo.BaseMutationOptions<DeleteStoryMutation, DeleteStoryMutationVariables>;
+export const UpdateStoryDocument = gql`
+    mutation updateStory($id: Float!, $input: UpdateStoryInput!) {
+  updateStory(id: $id, input: $input) {
+    ...StorySnippet
+  }
+}
+    ${StorySnippetFragmentDoc}`;
+export type UpdateStoryMutationFn = Apollo.MutationFunction<UpdateStoryMutation, UpdateStoryMutationVariables>;
+
+/**
+ * __useUpdateStoryMutation__
+ *
+ * To run a mutation, you first call `useUpdateStoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateStoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateStoryMutation, { data, loading, error }] = useUpdateStoryMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateStoryMutation(baseOptions?: Apollo.MutationHookOptions<UpdateStoryMutation, UpdateStoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateStoryMutation, UpdateStoryMutationVariables>(UpdateStoryDocument, options);
+      }
+export type UpdateStoryMutationHookResult = ReturnType<typeof useUpdateStoryMutation>;
+export type UpdateStoryMutationResult = Apollo.MutationResult<UpdateStoryMutation>;
+export type UpdateStoryMutationOptions = Apollo.BaseMutationOptions<UpdateStoryMutation, UpdateStoryMutationVariables>;
 export const GetStoriesDocument = gql`
     query GetStories {
   stories {

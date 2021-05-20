@@ -1,0 +1,5 @@
+mutation updateStory($id: Float!, $input: UpdateStoryInput!) {
+  updateStory(id: $id, input: $input) {
+    ...StorySnippet
+  }
+}

@@ -57,6 +57,39 @@ __decorate([
 CreateStoryInput = __decorate([
     type_graphql_1.InputType()
 ], CreateStoryInput);
+let UpdateStoryInput = class UpdateStoryInput {
+};
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], UpdateStoryInput.prototype, "head", void 0);
+__decorate([
+    type_graphql_1.Field({ nullable: true }),
+    __metadata("design:type", String)
+], UpdateStoryInput.prototype, "subHead", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], UpdateStoryInput.prototype, "storyText", void 0);
+__decorate([
+    type_graphql_1.Field({ nullable: true }),
+    __metadata("design:type", String)
+], UpdateStoryInput.prototype, "category", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], UpdateStoryInput.prototype, "author", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], UpdateStoryInput.prototype, "town", void 0);
+__decorate([
+    type_graphql_1.Field(() => [String]),
+    __metadata("design:type", Array)
+], UpdateStoryInput.prototype, "imgUrls", void 0);
+UpdateStoryInput = __decorate([
+    type_graphql_1.InputType()
+], UpdateStoryInput);
 let StoryResolver = class StoryResolver {
     stories(ctx) {
         return ctx.em.find(Story_entity_1.Story, {});
@@ -71,16 +104,14 @@ let StoryResolver = class StoryResolver {
             return newStory;
         });
     }
-    updateStory(id, head, ctx) {
+    updateStory(id, input, ctx) {
         return __awaiter(this, void 0, void 0, function* () {
             const updatedStory = yield ctx.em.findOne(Story_entity_1.Story, { id });
             if (!updatedStory) {
-                return null;
+                throw new Error("Story not found!");
             }
-            if (typeof head !== "undefined") {
-                updatedStory.head = head;
-                yield ctx.em.persistAndFlush(updatedStory);
-            }
+            Object.assign(updatedStory, input);
+            yield ctx.em.persistAndFlush(updatedStory);
             return updatedStory;
         });
     }
@@ -120,17 +151,17 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], StoryResolver.prototype, "createStory", null);
 __decorate([
-    type_graphql_1.Mutation(() => Story_entity_1.Story, { nullable: true }),
-    __param(0, type_graphql_1.Arg("id", () => String)),
-    __param(1, type_graphql_1.Arg("head", () => String, { nullable: true })),
+    type_graphql_1.Mutation(() => Story_entity_1.Story),
+    __param(0, type_graphql_1.Arg("id", () => Number)),
+    __param(1, type_graphql_1.Arg("input", () => UpdateStoryInput)),
     __param(2, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, String, Object]),
+    __metadata("design:paramtypes", [Number, UpdateStoryInput, Object]),
     __metadata("design:returntype", Promise)
 ], StoryResolver.prototype, "updateStory", null);
 __decorate([
     type_graphql_1.Mutation(() => Boolean),
-    __param(0, type_graphql_1.Arg("id", () => String)),
+    __param(0, type_graphql_1.Arg("id", () => Number)),
     __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Object]),
