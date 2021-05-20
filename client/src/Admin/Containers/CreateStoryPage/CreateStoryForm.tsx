@@ -120,7 +120,7 @@ const CreateStoryForm = () => {
                 error={!!errors?.storyText?.message}
                 helperText={errors?.storyText?.message}
                 multiline
-                rows={7}
+                rows={50}
               />
             )}
             rules={{ required: "Must enter text" }}
