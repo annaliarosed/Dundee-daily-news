@@ -2,7 +2,6 @@ export type TownType =
   | "east_dundee"
   | "west_dundee"
   | "carpentersville"
-  | "customer_support"
   | "sleepy_hollow"
   | "algonquin"
   | "undefined";

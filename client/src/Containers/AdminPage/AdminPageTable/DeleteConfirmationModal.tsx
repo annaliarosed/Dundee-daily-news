@@ -20,7 +20,7 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
           This action is irreversible and will permentately delete your story,
           if you would like to continue press delete
         </p>
-        <Stack direction="horizontal" gap={2}>
+        <Stack gap={2} justify="flex-end">
           <button className={styles.deleteButton} onClick={() => onDelete(id)}>
             Delete
           </button>

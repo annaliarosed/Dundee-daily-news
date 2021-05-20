@@ -39,7 +39,7 @@ const CreateStoryForm = () => {
   } = methods;
 
   const isDirty = Object.keys(dirtyFields).length !== 0;
-
+  console.log(getValues(), "dirtyFields");
   const handleClear = () => {
     reset();
     console.log(getValues(), "here");

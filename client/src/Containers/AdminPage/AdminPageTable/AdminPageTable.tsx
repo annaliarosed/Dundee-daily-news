@@ -12,7 +12,7 @@ import {
 import moment from "moment";
 
 import { Stack } from "../../../Components/Stack/Stack";
-import { StoryType } from "../../CreateStoryPage/helpers";
+import { CategoryTypesMapping, StoryType } from "../../CreateStoryPage/helpers";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import styles from "./AdminPageTable.module.scss";
 
@@ -50,11 +50,11 @@ const AdminPageTable: React.FC<AdminPageTableProps> = ({
                   {moment(Number(story.createdAt)).format("MMMM Do YYYY")}
                 </TableCell>
                 <TableCell>{story.head}</TableCell>
-                <TableCell>{story.category}</TableCell>
+                <TableCell>{CategoryTypesMapping[story.category]}</TableCell>
                 <TableCell>
                   <Stack>
                     <Link to={`/edit/${story.id}`}>
-                      <button className={styles.editButton}>edit</button>
+                      <button className={styles.editButton}>Edit</button>
                     </Link>
                     <button
                       className={styles.deleteButton}
@@ -63,7 +63,7 @@ const AdminPageTable: React.FC<AdminPageTableProps> = ({
                         setCurrentId(story.id);
                       }}
                     >
-                      delete
+                      Delete
                     </button>
                   </Stack>
                 </TableCell>
