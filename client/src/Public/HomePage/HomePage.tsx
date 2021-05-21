@@ -10,6 +10,8 @@ import {
 } from "../../Admin/Containers/CreateStoryPage/helpers";
 import { CircularProgress, Snackbar } from "@material-ui/core";
 import TopStoryCard from "./TopStoryCard";
+import StoryCard from "./StoryCard";
+import HomePageFooter from "./HomePageFooter";
 
 const HomePage = () => {
   const { data, error, loading } = useGetStoriesQuery();
@@ -36,19 +38,21 @@ const HomePage = () => {
   const sortedStories = sort(sortChronologically, stories);
 
   return (
-    <>
+    <div className={styles.homeWrapper}>
       <Header />
-      <div className={styles.body}>
-        <div className={styles.wrapper}>
-          <TopStoryCard story={sortedStories[0]} />
-          <Stack gap={3} direction="vertical" align="center">
-            {sortedStories.map((story) => (
-              <div></div>
-            ))}
-          </Stack>
-        </div>
+      <div className={styles.wrapper}>
+        <TopStoryCard story={sortedStories[0]} />
+        <Stack className={styles.storiesWrapper} gap={3} direction="vertical">
+          {sortedStories.slice(1, 7).map((story) => (
+            <>
+              <StoryCard key={story.id} story={story} />
+              <div className={styles.bottomBorder} />
+            </>
+          ))}
+        </Stack>
       </div>
-    </>
+      <HomePageFooter />
+    </div>
   );
 };
 

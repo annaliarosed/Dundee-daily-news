@@ -6,7 +6,14 @@
   --wrapper-padding: 40px;
   --main-color: #f5f5f2;
   --secondary-color: #f0f0e8;
-  --secondary-text: #666;
+  --secondary-text: #555;
+  --no-photo-color: #e8e8dc;
+
+  --east-dundee-color: #b8d1ec;
+  --west-dundee-color: #e6bfa7;
+  --carpentersville-color: #c9c5e5;
+  --sleepy-hollow-color: #b7dce1;
+  --algonquin-color: #b9d8ba;
 }
 
 code {
@@ -17,6 +24,10 @@ body {
   margin: 0;
   box-sizing: border-box;
   background-color: var(--main-color);
+}
+
+h3 {
+  margin: 0;
 }
 
 button {

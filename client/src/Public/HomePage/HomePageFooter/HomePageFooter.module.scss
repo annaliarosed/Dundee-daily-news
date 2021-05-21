@@ -1,0 +1,42 @@
+.wrapper {
+  margin: 0 40px;
+  padding: 5px 10px;
+
+  p {
+    text-transform: uppercase;
+  }
+}
+
+.townWrapper {
+  padding: 0 15px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.footer {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  border-bottom: 1px solid black;
+}
+
+.dLogo {
+  transform: scale(0.5);
+}
+
+.suggestButton {
+  justify-self: flex-start;
+}
+
+.supportButton {
+  justify-self: flex-end;
+}
+
+.footerFinePrint {
+  font-size: 10px;
+
+  p {
+    font-style: var(--font-italic-style);
+  }
+}

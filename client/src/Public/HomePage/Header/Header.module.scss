@@ -6,6 +6,10 @@
 
 .header {
   margin: 0 40px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
 }
 
 .underlines {
@@ -17,6 +21,7 @@
 
 .menuIcon {
   transform: scale(0.5);
+  justify-self: flex-start;
 }
 
 .dundeeLogo {
@@ -24,10 +29,5 @@
 }
 
 .subscribeButton {
-  padding: 8px 16px 5px 16px;
-  letter-spacing: 3px;
-  letter-spacing: 3px;
-  border-radius: 16.5px;
-  background-color: var(--secondary-color);
-  border: 1px solid black;
+  justify-self: flex-end;
 }

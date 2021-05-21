@@ -1,0 +1,33 @@
+.lozenge {
+  display: inline-flex;
+  height: 26px;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0 15px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  letter-spacing: 3px;
+  font-weight: var(--font-bold);
+  font-size: 12px;
+
+  &.east_dundee {
+    background-color: var(--east-dundee-color);
+  }
+
+  &.west_dundee {
+    background-color: var(--west-dundee-color);
+  }
+
+  &.carpentersville {
+    background-color: var(--carpentersville-color);
+  }
+
+  &.sleepy_hollow {
+    background-color: var(--sleepy-hollow-color);
+  }
+
+  &.algonquin {
+    background-color: var(--algonquin-color);
+  }
+}

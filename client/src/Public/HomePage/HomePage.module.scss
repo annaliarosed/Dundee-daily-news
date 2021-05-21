@@ -1,9 +1,26 @@
-.body {
-  max-width: 1920px;
-  padding: 0 40px;
+.homeWrapper {
+  max-width: 1400px;
   margin: 0 auto;
 }
 
 .wrapper {
-  padding: 40px;
+  display: grid;
+  padding: 20px 40px;
+  grid-template-columns: 50% 50%;
+}
+
+.bottomBorder {
+  &:not(:last-child) {
+    height: 1px;
+    background-color: black;
+    margin: 30px 20px;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-gap: 40px;
+  }
 }
