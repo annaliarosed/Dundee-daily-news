@@ -4,14 +4,14 @@ import { useGetStoriesQuery } from "../../Admin/generated/graphql";
 import Header from "./Header";
 import { sort } from "ramda";
 import styles from "./HomePage.module.scss";
-import {
-  CategoryTypesMapping,
-  StoryType,
-} from "../../Admin/Containers/CreateStoryPage/helpers";
+import { StoryType } from "../../Admin/Containers/CreateStoryPage/helpers";
 import { CircularProgress, Snackbar } from "@material-ui/core";
 import TopStoryCard from "./TopStoryCard";
 import StoryCard from "./StoryCard";
 import HomePageFooter from "./HomePageFooter";
+import { Link } from "react-router-dom";
+
+import cn from "classnames";
 
 const HomePage = () => {
   const { data, error, loading } = useGetStoriesQuery();
@@ -42,15 +42,21 @@ const HomePage = () => {
       <Header />
       <div className={styles.wrapper}>
         <TopStoryCard story={sortedStories[0]} />
-        <Stack className={styles.storiesWrapper} gap={3} direction="vertical">
-          {sortedStories.slice(1, 7).map((story) => (
-            <>
-              <StoryCard key={story.id} story={story} />
-              <div className={styles.bottomBorder} />
-            </>
+
+        <Stack direction="vertical">
+          {sortedStories.slice(1, 7).map((story, index) => (
+            <Link key={story.id} to={`/story/${story.id}`}>
+              <StoryCard story={story} />
+              <div
+                className={cn(styles.bottomBorder, {
+                  [styles.last]: index === 5,
+                })}
+              />
+            </Link>
           ))}
         </Stack>
       </div>
+
       <HomePageFooter />
     </div>
   );

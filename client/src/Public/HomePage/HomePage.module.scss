@@ -10,10 +10,12 @@
 }
 
 .bottomBorder {
-  &:not(:last-child) {
-    height: 1px;
-    background-color: black;
-    margin: 30px 20px;
+  height: 1px;
+  background-color: black;
+  margin: 30px 20px;
+
+  &.last {
+    display: none;
   }
 }
 

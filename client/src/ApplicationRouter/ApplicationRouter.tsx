@@ -4,6 +4,7 @@ import HomePage from "../Public/HomePage";
 import AdminPage from "../Admin/Containers/AdminPage";
 import CreateStoryPage from "../Admin/Containers/CreateStoryPage";
 import EditStoryPage from "../Admin/Containers/EditStoryPage";
+import StoryPage from "../Public/StoryPage";
 
 const ApplicationRouter = () => {
   return (
@@ -21,6 +22,10 @@ const ApplicationRouter = () => {
 
         <Route path="/edit/:id">
           <EditStoryPage />
+        </Route>
+
+        <Route path="/story/:id">
+          <StoryPage />
         </Route>
       </Switch>
     </Router>

@@ -4,7 +4,7 @@ export type TownType =
   | "carpentersville"
   | "sleepy_hollow"
   | "algonquin"
-  | "undefined";
+  | "local";
 
 export type CategoryType =
   | "news"

@@ -1,7 +1,4 @@
 .wrapper {
-  margin: 0 40px;
-  padding: 5px 10px;
-
   p {
     text-transform: uppercase;
   }
@@ -38,5 +35,14 @@
 
   p {
     font-style: var(--font-italic-style);
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .townWrapper {
+    padding: 3px 0;
+    > p {
+      display: none;
+    }
   }
 }

@@ -20,12 +20,12 @@ export type StoryType = {
   >;
 
 export const TownTypesMapping: Record<TownType, string> = {
-  east_dundee: "East Dundee",
-  west_dundee: "West Dundee",
-  carpentersville: "Carpentersville",
-  sleepy_hollow: "Sleepy Hollow",
   algonquin: "Algonquin",
-  undefined: "No town",
+  carpentersville: "Carpentersville",
+  east_dundee: "East Dundee",
+  sleepy_hollow: "Sleepy Hollow",
+  west_dundee: "West Dundee",
+  local: "Local",
 };
 
 export const TownTypesOptions = [
@@ -36,17 +36,17 @@ export const TownTypesOptions = [
 ];
 
 export const CategoryTypesMapping: Record<string, string> = {
-  news: "News",
-  crime: "Crime",
-  voting: "Voting",
   business: "Business",
-  village_hall: "Village hall",
-  history: "History",
-  opinion: "Opinion",
+  crime: "Crime",
   editorial: "Editorial",
   entertainment: "Entertainment",
+  history: "History",
+  undefined: "Miscellaneous",
+  news: "News",
+  opinion: "Opinion",
   school: "School",
-  undefined: "No category",
+  voting: "Voting",
+  village_hall: "Village hall",
 };
 
 export const CategoryTypesOptions = [

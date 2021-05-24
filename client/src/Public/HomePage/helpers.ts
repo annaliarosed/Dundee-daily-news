@@ -4,3 +4,11 @@ export interface Story {
   imgUrl: string | null;
   paragraph: string;
 }
+
+export const navHeadlines = [
+  "Home",
+  "Neighborhood",
+  "About us",
+  "Subscribe",
+  "Contact",
+];
