@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Header.module.scss";
 import menuIcon from "./images/menuIcon.png";
 import dundeeLogo from "./images/dundeeLogo.png";
@@ -7,10 +7,17 @@ import { Link } from "react-router-dom";
 import Menu from "../Menu";
 
 function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <header className={styles.wrapper}>
       <div className={styles.header}>
-        <img className={styles.menuIcon} src={menuIcon} alt="menu icon" />
+        <img
+          className={styles.menuIcon}
+          src={menuIcon}
+          alt="menu icon"
+          onClick={() => setIsMenuOpen(true)}
+        />
 
         <Link to="/">
           <img
@@ -24,7 +31,7 @@ function Header() {
       </div>
       <div className={styles.underlines}></div>
 
-      <Menu isOpen={true} />
+      <Menu isOpen={isMenuOpen} closeMenu={() => setIsMenuOpen(false)} />
     </header>
   );
 }

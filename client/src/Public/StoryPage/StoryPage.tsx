@@ -34,26 +34,14 @@ const StoryPage: React.FC<StoryPageProps> = () => {
   }
   console.log(story);
 
-  const regEx = /↵↵/i;
   return (
     <>
       <Header />
       <div className={styles.wrapper}>
-        <div className={styles.topBody}>
-          <Stack
-            direction="vertical"
-            align="flex-start"
-            justify="center"
-            className={styles.header}
-          >
+        <div className={styles.headerWrapper}>
+          <Stack direction="vertical" align="flex-start">
             <TownLozenge town={story.town} />
             <h1>{story.head}</h1>
-            <div className={styles.textWrapper}>
-              {moment(Number(story.createdAt)).format("MMMM Do YYYY // h:mm a")}
-              <p>{`Reported by ${story.author}`}</p>
-            </div>
-          </Stack>
-          <div className={styles.headerLeft}>
             <div className={styles.photoWrapper}>
               <div
                 className={styles.photo}
@@ -63,14 +51,24 @@ const StoryPage: React.FC<StoryPageProps> = () => {
                   })`,
                 }}
               />
-              {/* TODO add caption here when its in db */}
             </div>
-          </div>
+            <p>{/* {story.caption} */}</p>
+          </Stack>
         </div>
 
         <section className={styles.articleWrapper}>
+          <Stack gap={1}>
+            <p className={styles.author}>{story.author} </p>
+            <p className={styles.date}>
+              {`// ${moment(Number(story.createdAt)).format("MMMM D, YYYY ")}`}
+            </p>
+          </Stack>
           {story.storyText.split("\n").map((item, idx) => {
-            return <p key={idx}>{item}</p>;
+            return (
+              <p key={idx} className={styles.storyText}>
+                {item}
+              </p>
+            );
           })}
         </section>
 

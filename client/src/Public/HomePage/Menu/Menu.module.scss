@@ -13,6 +13,7 @@
   &.visible {
     display: block;
   }
+
   z-index: 4;
 }
 
@@ -28,7 +29,7 @@
 }
 
 .xButton {
-  transition: 0.5s;
+  transition: 0.2s;
   &:hover {
     cursor: pointer;
     transform: rotate(90deg);
@@ -48,6 +49,7 @@
 }
 
 .underline {
+  width: 250px;
   position: relative;
   z-index: 3;
   height: 3px;
@@ -63,21 +65,23 @@
   height: 20px;
   width: 20px;
   background-size: cover;
-  order: -1;
 
+  order: -1;
+  transition: 0.2s;
   opacity: 0;
 }
 
 .largeBulletPoint {
   background-size: 20px;
+
   height: 20px;
   width: 20px;
   background-repeat: no-repeat;
   background-position: center;
-  opacity: 0;
   order: -1;
   transition: 0.2s;
   margin-left: -23px;
+  opacity: 0;
 }
 
 .navWrapper {
@@ -119,9 +123,8 @@
 }
 
 .topics {
-  //   display: grid;
-  //   grid-template-columns: 1fr 1fr;
-  //   grid-gap: 0 20px;
+  max-height: 200px;
+  flex-wrap: wrap;
 
   .topic {
     padding-left: 10px;
@@ -149,6 +152,7 @@
   font-weight: var(--font-bold);
   text-transform: capitalize;
   z-index: 3;
+
   &:hover {
     cursor: pointer;
   }
@@ -196,3 +200,22 @@
     }
   }
 }
+
+//TODO fix
+
+// @media screen and (max-width: 850px) {
+//   .subMenusWrapper {
+//     flex-direction: column;
+//   }
+
+//   .topics {
+//     flex-wrap: nowrap;
+//     margin-bottom: 100px;
+//   }
+
+//   .imageWrapper {
+//     &.right {
+//       display: none;
+//     }
+//   }
+// }

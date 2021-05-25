@@ -14,14 +14,23 @@ import {
   TownTypesOptions,
 } from "../../../Admin/Containers/CreateStoryPage/helpers";
 import { navHeadlines } from "../helpers";
+import { Link, useHistory } from "react-router-dom";
 
 interface MenuProps {
   isOpen: boolean;
+  closeMenu: () => void;
 }
 
-const Menu: React.FC<MenuProps> = ({ isOpen }) => {
+const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
+  const history = useHistory();
+  console.log(history);
   return (
-    <div className={cn(styles.wrapper, { [styles.visible]: isOpen })}>
+    <div
+      className={cn(styles.wrapper, {
+        [styles.visible]: isOpen,
+        [styles.notVisible]: !isOpen,
+      })}
+    >
       <div className={styles.body}>
         <Stack
           gap={8}
@@ -30,7 +39,12 @@ const Menu: React.FC<MenuProps> = ({ isOpen }) => {
           align="center"
         >
           <img src={menu} alt="menu headline" />
-          <img className={styles.xButton} src={xButton} alt="close button" />
+          <img
+            className={styles.xButton}
+            src={xButton}
+            alt="close button"
+            onClick={closeMenu}
+          />
           <div className={styles.close}>Close</div>
         </Stack>
 
@@ -43,7 +57,7 @@ const Menu: React.FC<MenuProps> = ({ isOpen }) => {
             {navHeadlines.map((nav) => {
               if (nav === "Neighborhood") {
                 return (
-                  <Stack>
+                  <Stack className={styles.subMenusWrapper}>
                     <div className={styles.neighborhood}>
                       <Stack align="center" className={styles.navItem}>
                         <button className={styles.largeButton}>{nav}</button>
@@ -76,41 +90,22 @@ const Menu: React.FC<MenuProps> = ({ isOpen }) => {
                       </Stack>
                       <div className={styles.underline} />
 
-                      <Stack gap={5} className={styles.topics}>
-                        <Stack direction="vertical">
-                          {CategoryTypesOptions.slice(0, 5).map((category) => (
-                            <Stack
-                              align="center"
-                              justify="flex-start"
-                              className={cn(styles.topic)}
-                            >
-                              <button className={styles.smallButton}>
-                                {category.label}
-                              </button>
-                              <div
-                                className={styles.bulletPoint}
-                                style={{ backgroundImage: `url(${bullet})` }}
-                              />
-                            </Stack>
-                          ))}
-                        </Stack>
-                        <Stack direction="vertical">
-                          {CategoryTypesOptions.slice(5).map((category) => (
-                            <Stack
-                              align="center"
-                              justify="flex-start"
-                              className={cn(styles.topic)}
-                            >
-                              <button className={styles.smallButton}>
-                                {category.label}
-                              </button>
-                              <div
-                                className={styles.bulletPoint}
-                                style={{ backgroundImage: `url(${bullet})` }}
-                              />
-                            </Stack>
-                          ))}
-                        </Stack>
+                      <Stack direction="vertical" className={styles.topics}>
+                        {CategoryTypesOptions.map((category) => (
+                          <Stack
+                            align="center"
+                            justify="flex-start"
+                            className={cn(styles.topic)}
+                          >
+                            <button className={styles.smallButton}>
+                              {category.label}
+                            </button>
+                            <div
+                              className={styles.bulletPoint}
+                              style={{ backgroundImage: `url(${bullet})` }}
+                            />
+                          </Stack>
+                        ))}
                       </Stack>
                     </div>
                   </Stack>
@@ -119,7 +114,16 @@ const Menu: React.FC<MenuProps> = ({ isOpen }) => {
 
               return (
                 <Stack align="center" className={styles.navItem}>
-                  <button className={styles.largeButton}>{nav}</button>
+                  <Link to={`${nav === "Home" && "/"}`}>
+                    <button
+                      className={styles.largeButton}
+                      onClick={() => {
+                        closeMenu();
+                      }}
+                    >
+                      {nav}
+                    </button>
+                  </Link>
                   <div
                     className={styles.largeBulletPoint}
                     style={{ backgroundImage: `url(${largeBullet})` }}
