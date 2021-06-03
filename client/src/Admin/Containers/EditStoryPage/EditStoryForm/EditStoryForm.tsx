@@ -2,7 +2,7 @@ import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 import React, { useEffect, useMemo } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { Stack } from "../../../../Components/Stack/Stack";
-import { Story } from "../../../generated/graphql";
+import { Story } from "../../../../generated/graphql";
 import {
   CategoryTypesOptions,
   TownTypesOptions,

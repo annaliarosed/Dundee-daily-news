@@ -24,6 +24,14 @@ export type CreateStoryInput = {
   imgUrls: Array<Scalars['String']>;
 };
 
+export type FilterQueryByCategory = {
+  category?: Maybe<Scalars['String']>;
+};
+
+export type FilterQueryByTown = {
+  town?: Maybe<Scalars['String']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createStory: Story;
@@ -54,6 +62,12 @@ export type Query = {
 };
 
 
+export type QueryStoriesArgs = {
+  categoryFilter?: Maybe<FilterQueryByCategory>;
+  townFilter?: Maybe<FilterQueryByTown>;
+};
+
+
 export type QueryStoryArgs = {
   id: Scalars['Float'];
 };
@@ -65,10 +79,12 @@ export type Story = {
   updatedAt: Scalars['String'];
   head: Scalars['String'];
   subHead: Scalars['String'];
+  caption: Scalars['String'];
   storyText: Scalars['String'];
   category: Scalars['String'];
   author: Scalars['String'];
   town: Scalars['String'];
+  altText: Scalars['String'];
   imgUrls: Array<Scalars['String']>;
 };
 
@@ -84,7 +100,7 @@ export type UpdateStoryInput = {
 
 export type StorySnippetFragment = (
   { __typename?: 'Story' }
-  & Pick<Story, 'id' | 'createdAt' | 'updatedAt' | 'head' | 'subHead' | 'storyText' | 'category' | 'author' | 'town' | 'imgUrls'>
+  & Pick<Story, 'id' | 'createdAt' | 'updatedAt' | 'head' | 'subHead' | 'caption' | 'storyText' | 'category' | 'author' | 'altText' | 'town' | 'imgUrls'>
 );
 
 export type CreateStoryMutationVariables = Exact<{
@@ -124,7 +140,10 @@ export type UpdateStoryMutation = (
   ) }
 );
 
-export type GetStoriesQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetStoriesQueryVariables = Exact<{
+  townFilter?: Maybe<FilterQueryByTown>;
+  categoryFilter?: Maybe<FilterQueryByCategory>;
+}>;
 
 
 export type GetStoriesQuery = (
@@ -155,9 +174,11 @@ export const StorySnippetFragmentDoc = gql`
   updatedAt
   head
   subHead
+  caption
   storyText
   category
   author
+  altText
   town
   imgUrls
 }
@@ -261,8 +282,8 @@ export type UpdateStoryMutationHookResult = ReturnType<typeof useUpdateStoryMuta
 export type UpdateStoryMutationResult = Apollo.MutationResult<UpdateStoryMutation>;
 export type UpdateStoryMutationOptions = Apollo.BaseMutationOptions<UpdateStoryMutation, UpdateStoryMutationVariables>;
 export const GetStoriesDocument = gql`
-    query GetStories {
-  stories {
+    query GetStories($townFilter: FilterQueryByTown, $categoryFilter: FilterQueryByCategory) {
+  stories(townFilter: $townFilter, categoryFilter: $categoryFilter) {
     ...StorySnippet
   }
 }
@@ -280,6 +301,8 @@ export const GetStoriesDocument = gql`
  * @example
  * const { data, loading, error } = useGetStoriesQuery({
  *   variables: {
+ *      townFilter: // value for 'townFilter'
+ *      categoryFilter: // value for 'categoryFilter'
  *   },
  * });
  */

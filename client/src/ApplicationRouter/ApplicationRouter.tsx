@@ -7,42 +7,41 @@ import EditStoryPage from "../Admin/Containers/EditStoryPage";
 import StoryPage from "../Public/StoryPage";
 import NeighborhoodManagementPage from "../Public/NeighborhoodManagementPage";
 import TopicManagementPage from "../Public/TopicManagementPage";
+import NeighborhoodPage from "../Public/NeighborhoodManagementPage/NeighborhoodPage";
 
 const ApplicationRouter = () => {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
-        <Route path="/admin">
-          <AdminPage />
-        </Route>
-        <Route path="/create">
-          <CreateStoryPage />
-        </Route>
+    <Switch>
+      <Route exact path="/">
+        <HomePage />
+      </Route>
+      <Route path="/admin">
+        <AdminPage />
+      </Route>
+      <Route path="/create">
+        <CreateStoryPage />
+      </Route>
 
-        <Route path="/edit/:id">
-          <EditStoryPage />
-        </Route>
+      <Route path="/edit/:id">
+        <EditStoryPage />
+      </Route>
 
-        <Route path="/story/:id">
-          <StoryPage />
-        </Route>
+      <Route path="/story/:id">
+        <StoryPage />
+      </Route>
 
-        <Route path="/neighborhood/all">
-          <NeighborhoodManagementPage />
-        </Route>
+      <Route exact path="/neighborhood">
+        <NeighborhoodManagementPage />
+      </Route>
 
-        <Route path="/topic/all">
-          <TopicManagementPage />
-        </Route>
-        {/* 
-        <Route path="/neighborhood/:town">
-          <NeighborhoodManagementPage />
-        </Route> */}
-      </Switch>
-    </Router>
+      <Route path="/topic">
+        <TopicManagementPage />
+      </Route>
+
+      <Route path="/neighborhood/:town">
+        <NeighborhoodPage />
+      </Route>
+    </Switch>
   );
 };
 

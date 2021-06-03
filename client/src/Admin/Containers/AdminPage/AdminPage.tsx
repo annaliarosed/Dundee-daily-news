@@ -8,7 +8,7 @@ import {
   GetStoriesQuery,
   useDeleteStoryMutation,
   useGetStoriesQuery,
-} from "../../generated/graphql";
+} from "../../../generated/graphql";
 
 import styles from "./AdminPage.module.scss";
 import { StoryType } from "../CreateStoryPage/helpers";

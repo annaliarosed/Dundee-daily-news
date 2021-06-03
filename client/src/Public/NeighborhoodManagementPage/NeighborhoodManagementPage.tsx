@@ -8,6 +8,7 @@ import dundeeAd from "../HomePage/TopStoryCard/dundeeAd.png";
 import readMoreBulletPoints from "./images/readMoreBulletPoints.png";
 import bulletPoint from "./images/bulletPoint.png";
 import styles from "./NeighborhoodManagementPage.module.scss";
+import { Link } from "react-router-dom";
 
 const NeighborhoodManagementPage = () => {
   return (
@@ -26,23 +27,31 @@ const NeighborhoodManagementPage = () => {
             className={styles.townListWrapper}
           >
             {TownTypesOptions.map((town) => (
-              <Stack align="center" className={styles.townWrapper} tabIndex={0}>
-                <img
-                  className={styles.bulletPoint}
-                  src={bulletPoint}
-                  alt="bullet point"
-                />
-
-                <Stack gap={3} align="center" className={styles.town}>
-                  <h1>{town.label}</h1>
+              <Link key={town.value} to={`/neighborhood/${town.value}`}>
+                <Stack
+                  align="center"
+                  className={styles.townWrapper}
+                  tabIndex={0}
+                >
                   <img
-                    className={styles.readMore}
-                    src={readMoreBulletPoints}
-                    alt="three bullet points"
+                    className={styles.bulletPoint}
+                    src={bulletPoint}
+                    alt="bullet point"
                   />
-                  <div className={cn(styles.colorShadow, styles[town.value])} />
+
+                  <Stack gap={3} align="center" className={styles.town}>
+                    <h1>{town.label}</h1>
+                    <img
+                      className={styles.readMore}
+                      src={readMoreBulletPoints}
+                      alt="three bullet points"
+                    />
+                    <div
+                      className={cn(styles.colorShadow, styles[town.value])}
+                    />
+                  </Stack>
                 </Stack>
-              </Stack>
+              </Link>
             ))}
           </Stack>
 

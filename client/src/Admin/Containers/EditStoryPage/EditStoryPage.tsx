@@ -5,7 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import {
   useGetStoryQuery,
   useUpdateStoryMutation,
-} from "../../generated/graphql";
+} from "../../../generated/graphql";
 import EditStoryForm from "./EditStoryForm";
 import { EditStoryFormValues } from "./helpers";
 

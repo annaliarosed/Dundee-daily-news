@@ -2,7 +2,7 @@ import { CircularProgress, Snackbar } from "@material-ui/core";
 import moment from "moment";
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useGetStoryQuery } from "../../Admin/generated/graphql";
+import { useGetStoryQuery } from "../../generated/graphql";
 import { Stack } from "../../Components/Stack/Stack";
 import TownLozenge from "../../Components/TownLozenge";
 import Header from "../HomePage/Header";

@@ -15,6 +15,7 @@ import {
 } from "../../../Admin/Containers/CreateStoryPage/helpers";
 import { navOptions } from "../helpers";
 import { Link, useHistory } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
 interface MenuProps {
   isOpen: boolean;
@@ -59,7 +60,7 @@ const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
                 return (
                   <Stack className={styles.subMenusWrapper}>
                     <div className={styles.neighborhood}>
-                      <Link tabIndex={-1} to={`${nav.value}/all`}>
+                      <Link tabIndex={-1} to={`${nav.value}`}>
                         <Stack align="center" className={styles.navItem}>
                           <button
                             className={styles.largeButton}
@@ -80,9 +81,14 @@ const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
 
                       {TownTypesOptions.map((town) => (
                         <Stack align="center" className={styles.townWrapper}>
-                          <button className={styles.smallButton}>
-                            {town.label}
-                          </button>
+                          <Link
+                            key={town.value}
+                            to={`/neighborhood/${town.value}`}
+                          >
+                            <button className={styles.smallButton}>
+                              {town.label}
+                            </button>
+                          </Link>
                           <div
                             className={styles.bulletPoint}
                             style={{ backgroundImage: `url(${bullet})` }}
@@ -91,7 +97,7 @@ const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
                       ))}
                     </div>
                     <div className={styles.topicsWrapper}>
-                      <Link tabIndex={-1} to="topic/all">
+                      <Link tabIndex={-1} to="topic">
                         <Stack align="center" className={styles.navItem}>
                           <button
                             className={styles.largeButton}
@@ -137,6 +143,7 @@ const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
                     <button
                       className={styles.largeButton}
                       onClick={() => {
+                        history.push(`${nav.value}`);
                         closeMenu();
                       }}
                     >

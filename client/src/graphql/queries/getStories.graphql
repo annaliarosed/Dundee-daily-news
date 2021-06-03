@@ -1,0 +1,8 @@
+query GetStories(
+  $townFilter: FilterQueryByTown
+  $categoryFilter: FilterQueryByCategory
+) {
+  stories(townFilter: $townFilter, categoryFilter: $categoryFilter) {
+    ...StorySnippet
+  }
+}

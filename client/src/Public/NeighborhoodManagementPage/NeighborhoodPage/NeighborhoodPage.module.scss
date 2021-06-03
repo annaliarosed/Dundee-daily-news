@@ -1,0 +1,52 @@
+.wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  outline: none;
+}
+
+.body {
+  margin: 0 40px;
+  text-transform: capitalize;
+}
+
+.townHeaderWrapper {
+  padding: 10px 0;
+}
+
+.underlines {
+  border-bottom: 1px solid black;
+  border-top: 1px solid #000;
+  height: 6px;
+}
+
+.backButton {
+  font-style: var(--font-italic-style);
+}
+
+.townHeader {
+  margin: 0 auto;
+}
+
+.storiesWrapper {
+  display: grid;
+  padding: 20px 40px;
+  grid-template-columns: 50% 50%;
+}
+
+.bottomBorder {
+  height: 1px;
+  background-color: black;
+  margin: 30px 20px;
+
+  &.last {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .storiesWrapper {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-gap: 40px;
+  }
+}

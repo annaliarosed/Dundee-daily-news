@@ -1,12 +1,12 @@
 import React from "react";
 import { Stack } from "../../Components/Stack/Stack";
-import { useGetStoriesQuery } from "../../Admin/generated/graphql";
+import { useGetStoriesQuery } from "../../generated/graphql";
 import Header from "./Header";
 import { sort } from "ramda";
 import styles from "./HomePage.module.scss";
-import { StoryType } from "../../Admin/Containers/CreateStoryPage/helpers";
 import { CircularProgress, Snackbar } from "@material-ui/core";
 import TopStoryCard from "./TopStoryCard";
+import { sortChronologically } from "../../utils/sortChronologically";
 import StoryCard from "./StoryCard";
 import HomePageFooter from "./HomePageFooter";
 import { Link } from "react-router-dom";
@@ -25,15 +25,6 @@ const HomePage = () => {
   }
 
   const { stories } = data;
-
-  console.log(data, "ddata");
-
-  const sortChronologically = (a: StoryType, b: StoryType): number => {
-    return (
-      new Date(Number(b.createdAt)).getTime() -
-      new Date(Number(a.createdAt)).getTime()
-    );
-  };
 
   const sortedStories = sort(sortChronologically, stories);
 

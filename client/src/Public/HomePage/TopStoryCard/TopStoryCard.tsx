@@ -6,6 +6,7 @@ import cn from "classnames";
 import TownLozenge from "../../../Components/TownLozenge";
 import { Link } from "react-router-dom";
 import dundeeAd from "./dundeeAd.png";
+import Button from "../../../Components/Button";
 
 interface TopStoryCardProps {
   story: StoryType;
@@ -34,6 +35,7 @@ const TopStoryCard: React.FC<TopStoryCardProps> = ({ story }) => {
         <p>{story.subHead}</p>
         <p>{`${story.storyText.split(" ").slice(0, 40).join(" ")}...`}</p>
       </div>
+      <Button>More</Button>
       <div className={styles.adWrapper}>
         <img className={styles.ad} src={dundeeAd} alt="dundee ad" />
       </div>

@@ -4,9 +4,11 @@ fragment StorySnippet on Story {
   updatedAt
   head
   subHead
+  caption
   storyText
   category
   author
+  altText
   town
   imgUrls
 }

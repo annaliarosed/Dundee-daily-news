@@ -1,5 +1,5 @@
 import { CategoryType, TownType } from "../../../constants";
-import { Story } from "../../generated/graphql";
+import { Story } from "../../../generated/graphql";
 
 export type StoryType = {
   __typename?: "Story" | undefined;

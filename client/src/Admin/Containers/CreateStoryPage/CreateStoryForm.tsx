@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { Stack } from "../../../Components/Stack/Stack";
-import { useCreateStoryMutation } from "../../generated/graphql";
+import { useCreateStoryMutation } from "../../../generated/graphql";
 import CreateConfirmationModal from "./CreateConfirmationModal";
 import styles from "./CreateStoryForm.module.scss";
 import CreateStoryFormFooter from "./CreateStoryFormFooter";
@@ -17,8 +17,6 @@ import {
   TownTypesOptions,
 } from "./helpers";
 
-// TODO make default values
-// TODO decide data struucture
 const CreateStoryForm = () => {
   const [createStory] = useCreateStoryMutation();
   const history = useHistory();
