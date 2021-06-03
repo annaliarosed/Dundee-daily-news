@@ -26,6 +26,10 @@ export class Story {
 
   @Field(() => String)
   @Property({ type: "text" })
+  caption: string;
+
+  @Field(() => String)
+  @Property({ type: "text" })
   storyText!: string;
 
   @Field(() => String)
@@ -39,6 +43,10 @@ export class Story {
   @Field(() => String)
   @Property({ type: "text" })
   town: string;
+
+  @Field(() => String)
+  @Property({ type: "text" })
+  altText: string;
 
   @Field(() => [String])
   @Property({ type: "array", nullable: true })

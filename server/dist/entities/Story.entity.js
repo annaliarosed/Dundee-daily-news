@@ -47,6 +47,11 @@ __decorate([
     type_graphql_1.Field(() => String),
     core_1.Property({ type: "text" }),
     __metadata("design:type", String)
+], Story.prototype, "caption", void 0);
+__decorate([
+    type_graphql_1.Field(() => String),
+    core_1.Property({ type: "text" }),
+    __metadata("design:type", String)
 ], Story.prototype, "storyText", void 0);
 __decorate([
     type_graphql_1.Field(() => String),
@@ -63,6 +68,11 @@ __decorate([
     core_1.Property({ type: "text" }),
     __metadata("design:type", String)
 ], Story.prototype, "town", void 0);
+__decorate([
+    type_graphql_1.Field(() => String),
+    core_1.Property({ type: "text" }),
+    __metadata("design:type", String)
+], Story.prototype, "altText", void 0);
 __decorate([
     type_graphql_1.Field(() => [String]),
     core_1.Property({ type: "array", nullable: true }),

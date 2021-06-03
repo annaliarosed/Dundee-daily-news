@@ -91,7 +91,7 @@ const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
                       ))}
                     </div>
                     <div className={styles.topicsWrapper}>
-                      <Link tabIndex={-1} to={`topic/all`}>
+                      <Link tabIndex={-1} to="topic/all">
                         <Stack align="center" className={styles.navItem}>
                           <button
                             className={styles.largeButton}

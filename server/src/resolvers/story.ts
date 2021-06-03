@@ -47,10 +47,36 @@ class UpdateStoryInput {
   imgUrls!: string[];
 }
 
+@InputType()
+class FilterQueryByTown {
+  @Field({ nullable: true })
+  town: string;
+}
+
+@InputType()
+class FilterQueryByCategory {
+  @Field({ nullable: true })
+  category: string;
+}
+
 @Resolver()
 export class StoryResolver {
   @Query(() => [Story])
-  stories(@Ctx() ctx: MyContext): Promise<Story[]> {
+  stories(
+    @Arg("townFilter", () => FilterQueryByTown, { nullable: true })
+    townFilter: FilterQueryByTown,
+    @Arg("categoryFilter", () => FilterQueryByCategory, { nullable: true })
+    categoryFilter: FilterQueryByCategory,
+    @Ctx() ctx: MyContext
+  ): Promise<Story[]> {
+    if (townFilter) {
+      return ctx.em.find(Story, { ...townFilter });
+    }
+
+    if (categoryFilter) {
+      return ctx.em.find(Story, { ...categoryFilter });
+    }
+
     return ctx.em.find(Story, {});
   }
 

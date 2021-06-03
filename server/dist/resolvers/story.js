@@ -90,8 +90,32 @@ __decorate([
 UpdateStoryInput = __decorate([
     type_graphql_1.InputType()
 ], UpdateStoryInput);
+let FilterQueryByTown = class FilterQueryByTown {
+};
+__decorate([
+    type_graphql_1.Field({ nullable: true }),
+    __metadata("design:type", String)
+], FilterQueryByTown.prototype, "town", void 0);
+FilterQueryByTown = __decorate([
+    type_graphql_1.InputType()
+], FilterQueryByTown);
+let FilterQueryByCategory = class FilterQueryByCategory {
+};
+__decorate([
+    type_graphql_1.Field({ nullable: true }),
+    __metadata("design:type", String)
+], FilterQueryByCategory.prototype, "category", void 0);
+FilterQueryByCategory = __decorate([
+    type_graphql_1.InputType()
+], FilterQueryByCategory);
 let StoryResolver = class StoryResolver {
-    stories(ctx) {
+    stories(townFilter, categoryFilter, ctx) {
+        if (townFilter) {
+            return ctx.em.find(Story_entity_1.Story, Object.assign({}, townFilter));
+        }
+        if (categoryFilter) {
+            return ctx.em.find(Story_entity_1.Story, Object.assign({}, categoryFilter));
+        }
         return ctx.em.find(Story_entity_1.Story, {});
     }
     story(id, ctx) {
@@ -129,9 +153,12 @@ let StoryResolver = class StoryResolver {
 };
 __decorate([
     type_graphql_1.Query(() => [Story_entity_1.Story]),
-    __param(0, type_graphql_1.Ctx()),
+    __param(0, type_graphql_1.Arg("townFilter", () => FilterQueryByTown, { nullable: true })),
+    __param(1, type_graphql_1.Arg("categoryFilter", () => FilterQueryByCategory, { nullable: true })),
+    __param(2, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [FilterQueryByTown,
+        FilterQueryByCategory, Object]),
     __metadata("design:returntype", Promise)
 ], StoryResolver.prototype, "stories", null);
 __decorate([
