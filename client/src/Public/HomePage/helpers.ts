@@ -5,10 +5,10 @@ export interface Story {
   paragraph: string;
 }
 
-export const navHeadlines = [
-  "Home",
-  "Neighborhood",
-  "About us",
-  "Subscribe",
-  "Contact",
+export const navOptions = [
+  { value: "/", label: "Home" },
+  { value: "neighborhood", label: "Neighborhood" },
+  { value: "about", label: "About us" },
+  { value: "subscribe", label: "Subscribe" },
+  { value: "contact", label: "Contact" },
 ];

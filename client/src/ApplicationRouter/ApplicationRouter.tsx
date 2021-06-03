@@ -5,6 +5,8 @@ import AdminPage from "../Admin/Containers/AdminPage";
 import CreateStoryPage from "../Admin/Containers/CreateStoryPage";
 import EditStoryPage from "../Admin/Containers/EditStoryPage";
 import StoryPage from "../Public/StoryPage";
+import NeighborhoodManagementPage from "../Public/NeighborhoodManagementPage";
+import TopicManagementPage from "../Public/TopicManagementPage";
 
 const ApplicationRouter = () => {
   return (
@@ -27,6 +29,18 @@ const ApplicationRouter = () => {
         <Route path="/story/:id">
           <StoryPage />
         </Route>
+
+        <Route path="/neighborhood/all">
+          <NeighborhoodManagementPage />
+        </Route>
+
+        <Route path="/topic/all">
+          <TopicManagementPage />
+        </Route>
+        {/* 
+        <Route path="/neighborhood/:town">
+          <NeighborhoodManagementPage />
+        </Route> */}
       </Switch>
     </Router>
   );

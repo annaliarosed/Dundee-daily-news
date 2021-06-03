@@ -3,8 +3,8 @@ export type TownType =
   | "west_dundee"
   | "carpentersville"
   | "sleepy_hollow"
-  | "algonquin"
-  | "local";
+  | "algonquin";
+//| "local";
 
 export type CategoryType =
   | "news"

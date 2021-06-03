@@ -25,7 +25,7 @@ export const TownTypesMapping: Record<TownType, string> = {
   east_dundee: "East Dundee",
   sleepy_hollow: "Sleepy Hollow",
   west_dundee: "West Dundee",
-  local: "Local",
+  //local: "Local",
 };
 
 export const TownTypesOptions = [

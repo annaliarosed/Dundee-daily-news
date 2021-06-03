@@ -5,15 +5,15 @@ import { Stack } from "../../../Components/Stack/Stack";
 import menu from "./menuImages/menu.png";
 import menuDundeeSign from "./menuImages/menuDundeeSign.png";
 import largeBullet from "./menuImages/largeBullet.png";
-import xButton from "./menuImages/xButton.png";
 import bullet from "./menuImages/bullet.png";
+import xButton from "./menuImages/xButton.png";
 
 import styles from "./Menu.module.scss";
 import {
   CategoryTypesOptions,
   TownTypesOptions,
 } from "../../../Admin/Containers/CreateStoryPage/helpers";
-import { navHeadlines } from "../helpers";
+import { navOptions } from "../helpers";
 import { Link, useHistory } from "react-router-dom";
 
 interface MenuProps {
@@ -54,18 +54,28 @@ const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
           className={styles.navWrapper}
         >
           <Stack direction="vertical">
-            {navHeadlines.map((nav) => {
-              if (nav === "Neighborhood") {
+            {navOptions.map((nav) => {
+              if (nav.value === "neighborhood") {
                 return (
                   <Stack className={styles.subMenusWrapper}>
                     <div className={styles.neighborhood}>
-                      <Stack align="center" className={styles.navItem}>
-                        <button className={styles.largeButton}>{nav}</button>
-                        <div
-                          className={styles.largeBulletPoint}
-                          style={{ backgroundImage: `url(${largeBullet})` }}
-                        />
-                      </Stack>
+                      <Link tabIndex={-1} to={`${nav.value}/all`}>
+                        <Stack align="center" className={styles.navItem}>
+                          <button
+                            className={styles.largeButton}
+                            onClick={() => {
+                              closeMenu();
+                            }}
+                          >
+                            {nav.label}
+                          </button>
+
+                          <div
+                            className={styles.largeBulletPoint}
+                            style={{ backgroundImage: `url(${largeBullet})` }}
+                          />
+                        </Stack>
+                      </Link>
                       <div className={styles.underline} />
 
                       {TownTypesOptions.map((town) => (
@@ -81,13 +91,22 @@ const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
                       ))}
                     </div>
                     <div className={styles.topicsWrapper}>
-                      <Stack align="center" className={styles.navItem}>
-                        <button className={styles.largeButton}>Topic</button>
-                        <div
-                          className={styles.largeBulletPoint}
-                          style={{ backgroundImage: `url(${largeBullet})` }}
-                        />
-                      </Stack>
+                      <Link tabIndex={-1} to={`topic/all`}>
+                        <Stack align="center" className={styles.navItem}>
+                          <button
+                            className={styles.largeButton}
+                            onClick={() => {
+                              closeMenu();
+                            }}
+                          >
+                            Topic
+                          </button>
+                          <div
+                            className={styles.largeBulletPoint}
+                            style={{ backgroundImage: `url(${largeBullet})` }}
+                          />
+                        </Stack>
+                      </Link>
                       <div className={styles.underline} />
 
                       <Stack direction="vertical" className={styles.topics}>
@@ -113,22 +132,23 @@ const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
               }
 
               return (
-                <Stack align="center" className={styles.navItem}>
-                  <Link to={`${nav === "Home" && "/"}`}>
+                <Link tabIndex={-1} to={`${nav.value}`}>
+                  <Stack align="center" className={styles.navItem}>
                     <button
                       className={styles.largeButton}
                       onClick={() => {
                         closeMenu();
                       }}
                     >
-                      {nav}
+                      {nav.label}
                     </button>
-                  </Link>
-                  <div
-                    className={styles.largeBulletPoint}
-                    style={{ backgroundImage: `url(${largeBullet})` }}
-                  />
-                </Stack>
+
+                    <div
+                      className={styles.largeBulletPoint}
+                      style={{ backgroundImage: `url(${largeBullet})` }}
+                    />
+                  </Stack>
+                </Link>
               );
             })}
           </Stack>

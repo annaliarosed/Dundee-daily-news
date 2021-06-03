@@ -1,6 +1,7 @@
 .wrapper {
+  outline: none;
   display: none;
-  z-index: 3;
+  z-index: 999;
   position: fixed;
   top: 0;
   left: 0;
@@ -14,7 +15,7 @@
     display: block;
   }
 
-  z-index: 4;
+  z-index: 999;
 }
 
 .body {
@@ -51,7 +52,7 @@
 .underline {
   width: 250px;
   position: relative;
-  z-index: 3;
+  z-index: 999;
   height: 3px;
   border-bottom: 1px solid var(--menu-secondary-color);
   border-top: 1px solid var(--menu-secondary-color);
@@ -151,7 +152,7 @@
   font-family: var(--font);
   font-weight: var(--font-bold);
   text-transform: capitalize;
-  z-index: 3;
+  z-index: 999;
 
   &:hover {
     cursor: pointer;
@@ -174,7 +175,7 @@
 .largeButton {
   outline: none;
 
-  z-index: 3;
+  z-index: 999;
   margin: 5px 15px;
   background-color: transparent;
   color: var(--menu-secondary-color);

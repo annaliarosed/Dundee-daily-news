@@ -7,6 +7,7 @@ export const StackScale = [0, 1, 2, 3, 4, 5, 6, 7, 8] as const;
 type StackScaleType = typeof StackScale[number];
 
 export interface StackProps extends React.HTMLAttributes<HTMLDivElement> {
+  tabIndex?: number;
   children: React.ReactNode;
   gap?: StackScaleType;
   padding?: StackScaleType;
@@ -24,6 +25,7 @@ export interface StackProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function Stack({
+  tabIndex,
   children,
   gap = 0,
   padding = 0,
@@ -54,6 +56,7 @@ export function Stack({
 
   return (
     <div
+      tabIndex={tabIndex}
       style={s}
       className={
         cn(
