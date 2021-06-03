@@ -1,0 +1,104 @@
+.wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  outline: none;
+}
+
+.body {
+  margin: 0 40px;
+  text-transform: capitalize;
+}
+
+.underlines {
+  border-bottom: 1px solid black;
+  border-top: 1px solid #000;
+  height: 6px;
+}
+
+.bulletPoint {
+  transform: scale(0.5);
+  opacity: 0;
+}
+
+.mainContent {
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: 1fr min-content;
+}
+
+.categoryListWrapper {
+  margin-left: -35px;
+}
+
+.categoryWrapper:hover {
+  cursor: pointer;
+  .bulletPoint {
+    opacity: 1;
+  }
+}
+
+.categoryWrapper:focus {
+  outline: none;
+  .bulletPoint {
+    opacity: 1;
+  }
+
+  .colorShadow {
+    opacity: 0.9;
+    background-color: #dedec9;
+  }
+}
+
+.category {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+
+  h1 {
+    margin: 0;
+    font-size: 60px;
+    z-index: 2;
+  }
+}
+
+.category::after {
+  box-shadow: inset 0 -14px 0 var(--main-color), inset 0 -16px 0 black;
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.readMore {
+  z-index: 4;
+  transform: scale(0.5);
+}
+
+.colorShadow {
+  width: 100%;
+  height: 20px;
+  position: absolute;
+  margin: 21px 0 0 0;
+  opacity: 0;
+}
+
+.category:hover {
+  .colorShadow {
+    opacity: 0.9;
+    background-color: #dedec9;
+  }
+}
+
+.dundeeAdWrapper {
+  z-index: 4;
+  max-width: 500px;
+  min-width: 300px;
+  background-color: var(--secondary-color);
+}
+
+.ad {
+  transform: scale(0.5);
+  transform-origin: center;
+}

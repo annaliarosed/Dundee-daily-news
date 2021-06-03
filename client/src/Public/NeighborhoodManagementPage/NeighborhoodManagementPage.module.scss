@@ -9,15 +9,15 @@
   text-transform: capitalize;
 }
 
-.bulletPoint {
-  transform: scale(0.5);
-  opacity: 0;
-}
-
 .underlines {
   border-bottom: 1px solid black;
   border-top: 1px solid #000;
   height: 6px;
+}
+
+.bulletPoint {
+  transform: scale(0.5);
+  opacity: 0;
 }
 
 .mainContent {
