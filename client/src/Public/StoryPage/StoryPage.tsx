@@ -35,15 +35,16 @@ const StoryPage: React.FC<StoryPageProps> = () => {
   console.log(story);
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <Header />
-      <div className={styles.wrapper}>
+      <div className={styles.body}>
         <div className={styles.headerWrapper}>
           <Stack direction="vertical" align="flex-start">
             <TownLozenge town={story.town} />
             <h1>{story.head}</h1>
             <div className={styles.photoWrapper}>
               <div
+                title={story.altText}
                 className={styles.photo}
                 style={{
                   backgroundImage: `url(${
@@ -74,7 +75,7 @@ const StoryPage: React.FC<StoryPageProps> = () => {
 
         <HomePageFooter />
       </div>
-    </>
+    </div>
   );
 };
 

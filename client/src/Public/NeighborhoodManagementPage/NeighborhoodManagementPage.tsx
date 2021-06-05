@@ -21,25 +21,21 @@ const NeighborhoodManagementPage = () => {
         </Stack>
 
         <div className={styles.mainContent}>
-          <Stack
-            direction="vertical"
-            justify="space-between"
-            className={styles.townListWrapper}
-          >
+          <Stack direction="vertical" className={styles.townListWrapper}>
             {TownTypesOptions.map((town) => (
-              <Link key={town.value} to={`/neighborhood/${town.value}`}>
-                <Stack
-                  align="center"
-                  className={styles.townWrapper}
-                  tabIndex={0}
-                >
+              <Link
+                key={town.value}
+                to={`/neighborhood/${town.value}`}
+                className={styles.townWrapper}
+              >
+                <Stack align="center">
                   <img
                     className={styles.bulletPoint}
                     src={bulletPoint}
                     alt="bullet point"
                   />
 
-                  <Stack gap={3} align="center" className={styles.town}>
+                  <Stack align="center" className={styles.town}>
                     <h1>{town.label}</h1>
                     <img
                       className={styles.readMore}
@@ -56,7 +52,11 @@ const NeighborhoodManagementPage = () => {
           </Stack>
 
           <div className={styles.dundeeAdWrapper}>
-            <img className={styles.ad} src={dundeeAd} alt="dundee ad" />
+            <img
+              className={styles.ad}
+              src={dundeeAd}
+              alt="dundee ad to subscribe"
+            />
           </div>
         </div>
       </div>

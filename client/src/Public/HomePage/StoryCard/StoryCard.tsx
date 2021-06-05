@@ -14,6 +14,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ story }) => (
   <Stack className={styles.wrapper} gap={3}>
     <div className={styles.photoWrapper}>
       <div
+        title={story.altText}
         className={styles.photo}
         style={{
           backgroundImage: `url(${story.imgUrls[0] && story.imgUrls[0]})`,

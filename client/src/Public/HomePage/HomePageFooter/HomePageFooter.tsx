@@ -21,7 +21,7 @@ const HomePageFooter = () => (
         >
           <Button>Suggest a story</Button>
         </a>
-        <img className={styles.dLogo} src={dLogo} alt="D logo" />
+        <img className={styles.dLogo} src={dLogo} alt="D for dundee logo" />
         <Button className={styles.supportButton}>Support local news</Button>
       </div>
 

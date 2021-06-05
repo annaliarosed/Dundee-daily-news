@@ -17,6 +17,8 @@ class CreateStoryInput {
   head!: string;
   @Field({ nullable: true })
   subHead!: string;
+  @Field({ nullable: true })
+  caption!: string;
   @Field()
   storyText!: string;
   @Field({ nullable: true })
@@ -25,6 +27,8 @@ class CreateStoryInput {
   author!: string;
   @Field()
   town!: string;
+  @Field({ nullable: true })
+  altText!: string;
   @Field(() => [String])
   imgUrls!: string[];
 }
@@ -35,6 +39,8 @@ class UpdateStoryInput {
   head!: string;
   @Field({ nullable: true })
   subHead!: string;
+  @Field({ nullable: true })
+  caption!: string;
   @Field()
   storyText!: string;
   @Field({ nullable: true })
@@ -43,6 +49,8 @@ class UpdateStoryInput {
   author!: string;
   @Field()
   town!: string;
+  @Field({ nullable: true })
+  altText!: string;
   @Field(() => [String])
   imgUrls!: string[];
 }

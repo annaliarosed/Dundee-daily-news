@@ -35,6 +35,10 @@ __decorate([
     __metadata("design:type", String)
 ], CreateStoryInput.prototype, "subHead", void 0);
 __decorate([
+    type_graphql_1.Field({ nullable: true }),
+    __metadata("design:type", String)
+], CreateStoryInput.prototype, "caption", void 0);
+__decorate([
     type_graphql_1.Field(),
     __metadata("design:type", String)
 ], CreateStoryInput.prototype, "storyText", void 0);
@@ -50,6 +54,10 @@ __decorate([
     type_graphql_1.Field(),
     __metadata("design:type", String)
 ], CreateStoryInput.prototype, "town", void 0);
+__decorate([
+    type_graphql_1.Field({ nullable: true }),
+    __metadata("design:type", String)
+], CreateStoryInput.prototype, "altText", void 0);
 __decorate([
     type_graphql_1.Field(() => [String]),
     __metadata("design:type", Array)
@@ -68,6 +76,10 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateStoryInput.prototype, "subHead", void 0);
 __decorate([
+    type_graphql_1.Field({ nullable: true }),
+    __metadata("design:type", String)
+], UpdateStoryInput.prototype, "caption", void 0);
+__decorate([
     type_graphql_1.Field(),
     __metadata("design:type", String)
 ], UpdateStoryInput.prototype, "storyText", void 0);
@@ -83,6 +95,10 @@ __decorate([
     type_graphql_1.Field(),
     __metadata("design:type", String)
 ], UpdateStoryInput.prototype, "town", void 0);
+__decorate([
+    type_graphql_1.Field({ nullable: true }),
+    __metadata("design:type", String)
+], UpdateStoryInput.prototype, "altText", void 0);
 __decorate([
     type_graphql_1.Field(() => [String]),
     __metadata("design:type", Array)

@@ -26,10 +26,12 @@ const EditStoryForm: React.FC<EditStoryFormProps> = ({
     () => ({
       head: story.head,
       subHead: story.subHead,
+      caption: story.caption,
       storyText: story.storyText,
       author: story.author,
       category: story.category,
       town: story.town,
+      altText: story.altText,
       imgUrls: story.imgUrls,
     }),
     [story]
@@ -88,6 +90,15 @@ const EditStoryForm: React.FC<EditStoryFormProps> = ({
           />
 
           <Controller
+            defaultValue={story?.caption}
+            render={({ field }) => (
+              <TextField {...field} variant="outlined" label="Caption" />
+            )}
+            name="caption"
+            control={control}
+          />
+
+          <Controller
             defaultValue={story?.storyText}
             render={({ field }) => (
               <TextField
@@ -116,6 +127,19 @@ const EditStoryForm: React.FC<EditStoryFormProps> = ({
               />
             )}
             name="author"
+            control={control}
+          />
+
+          <Controller
+            defaultValue={story?.altText}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                variant="outlined"
+                label="Alt text for image"
+              />
+            )}
+            name="altText"
             control={control}
           />
 

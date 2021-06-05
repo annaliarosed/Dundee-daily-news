@@ -34,8 +34,6 @@ const NeighborhoodPage = () => {
 
   const { stories } = data;
 
-  console.log(stories);
-
   const sortedStories = sort(sortChronologically, stories);
 
   return (

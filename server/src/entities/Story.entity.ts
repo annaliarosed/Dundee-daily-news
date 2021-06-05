@@ -52,5 +52,3 @@ export class Story {
   @Property({ type: "array", nullable: true })
   imgUrls: string[];
 }
-
-// create: migration everytime the file is edited

@@ -12,10 +12,12 @@ export type StoryType = {
     | "updatedAt"
     | "head"
     | "subHead"
+    | "caption"
     | "storyText"
     | "category"
     | "author"
     | "town"
+    | "altText"
     | "imgUrls"
   >;
 
@@ -60,19 +62,23 @@ export const CategoryTypesOptions = [
 export interface CreateStoryFormValues {
   head: string;
   subHead: string;
+  caption: string;
   storyText: string;
   author: string;
   category: CategoryType | string;
   town: TownType | string;
+  altText: string;
   imgUrls: string[];
 }
 
 export const defaultValuesCreateForm = {
   head: "",
   subHead: "",
+  caption: "",
   storyText: "",
   author: "",
   category: "",
   town: "",
+  altText: "",
   imgUrls: [""],
 };

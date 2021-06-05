@@ -23,7 +23,7 @@ function Header() {
           <img
             className={styles.dundeeLogo}
             src={dundeeLogo}
-            alt="Dundee daily news"
+            alt="Dundee daily news logo"
           />
         </Link>
 

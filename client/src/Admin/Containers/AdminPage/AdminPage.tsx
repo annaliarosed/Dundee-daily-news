@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { sort } from "ramda";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Button, CircularProgress, Snackbar } from "@material-ui/core";
 
 import AdminPageTable from "./AdminPageTable/AdminPageTable";
@@ -85,4 +85,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default withRouter(AdminPage);

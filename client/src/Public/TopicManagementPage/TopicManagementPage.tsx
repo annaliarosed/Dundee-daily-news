@@ -8,6 +8,7 @@ import readMoreBulletPoints from "../NeighborhoodManagementPage/images/readMoreB
 import bulletPoint from "../NeighborhoodManagementPage/images/bulletPoint.png";
 
 import styles from "./TopicManagementPage.module.scss";
+import { Link } from "react-router-dom";
 
 const TopicManagementPage = () => {
   return (
@@ -25,32 +26,38 @@ const TopicManagementPage = () => {
             className={styles.categoryListWrapper}
           >
             {CategoryTypesOptions.map((category) => (
-              <Stack
-                align="center"
+              <Link
+                key={category.value}
+                to={`/topic/${category.value}`}
                 className={styles.categoryWrapper}
-                tabIndex={0}
               >
-                <img
-                  className={styles.bulletPoint}
-                  src={bulletPoint}
-                  alt="bullet point"
-                />
-
-                <Stack gap={3} align="center" className={styles.category}>
-                  <h1>{category.label}</h1>
+                <Stack align="center">
                   <img
-                    className={styles.readMore}
-                    src={readMoreBulletPoints}
-                    alt="three bullet points"
+                    className={styles.bulletPoint}
+                    src={bulletPoint}
+                    alt="bullet point"
                   />
-                  <div className={styles.colorShadow} />
+
+                  <Stack align="center" className={styles.category}>
+                    <h1>{category.label}</h1>
+                    <img
+                      className={styles.readMore}
+                      src={readMoreBulletPoints}
+                      alt="three bullet points"
+                    />
+                    <div className={styles.colorShadow} />
+                  </Stack>
                 </Stack>
-              </Stack>
+              </Link>
             ))}
           </Stack>
 
           <div className={styles.dundeeAdWrapper}>
-            <img className={styles.ad} src={dundeeAd} alt="dundee ad" />
+            <img
+              className={styles.ad}
+              src={dundeeAd}
+              alt="dundee ad to subscribe"
+            />
           </div>
         </div>
       </div>

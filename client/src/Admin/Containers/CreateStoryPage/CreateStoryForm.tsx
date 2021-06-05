@@ -111,6 +111,14 @@ const CreateStoryForm = () => {
 
           <Controller
             render={({ field }) => (
+              <TextField {...field} variant="outlined" label="Caption" />
+            )}
+            name="caption"
+            control={control}
+          />
+
+          <Controller
+            render={({ field }) => (
               <TextField
                 {...field}
                 variant="outlined"
@@ -136,6 +144,18 @@ const CreateStoryForm = () => {
               />
             )}
             name="author"
+            control={control}
+          />
+
+          <Controller
+            render={({ field }) => (
+              <TextField
+                {...field}
+                variant="outlined"
+                label="Alt text for image"
+              />
+            )}
+            name="altText"
             control={control}
           />
 

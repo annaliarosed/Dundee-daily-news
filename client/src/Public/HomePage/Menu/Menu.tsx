@@ -72,6 +72,7 @@ const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
                           </button>
 
                           <div
+                            title="large bullet point"
                             className={styles.largeBulletPoint}
                             style={{ backgroundImage: `url(${largeBullet})` }}
                           />
@@ -81,15 +82,17 @@ const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
 
                       {TownTypesOptions.map((town) => (
                         <Stack align="center" className={styles.townWrapper}>
-                          <Link
-                            key={town.value}
-                            to={`/neighborhood/${town.value}`}
+                          <button
+                            className={styles.smallButton}
+                            onClick={() =>
+                              history.push(`/neighborhood/${town.value}`)
+                            }
                           >
-                            <button className={styles.smallButton}>
-                              {town.label}
-                            </button>
-                          </Link>
+                            {town.label}
+                          </button>
+
                           <div
+                            title="bullet point"
                             className={styles.bulletPoint}
                             style={{ backgroundImage: `url(${bullet})` }}
                           />
@@ -97,22 +100,23 @@ const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
                       ))}
                     </div>
                     <div className={styles.topicsWrapper}>
-                      <Link tabIndex={-1} to="topic">
-                        <Stack align="center" className={styles.navItem}>
-                          <button
-                            className={styles.largeButton}
-                            onClick={() => {
-                              closeMenu();
-                            }}
-                          >
-                            Topic
-                          </button>
-                          <div
-                            className={styles.largeBulletPoint}
-                            style={{ backgroundImage: `url(${largeBullet})` }}
-                          />
-                        </Stack>
-                      </Link>
+                      <Stack align="center" className={styles.navItem}>
+                        <button
+                          className={styles.largeButton}
+                          onClick={() => {
+                            history.push("/topic");
+                            closeMenu();
+                          }}
+                        >
+                          Topic
+                        </button>
+                        <div
+                          title="large bullet point"
+                          className={styles.largeBulletPoint}
+                          style={{ backgroundImage: `url(${largeBullet})` }}
+                        />
+                      </Stack>
+
                       <div className={styles.underline} />
 
                       <Stack direction="vertical" className={styles.topics}>
@@ -122,10 +126,16 @@ const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
                             justify="flex-start"
                             className={cn(styles.topic)}
                           >
-                            <button className={styles.smallButton}>
+                            <button
+                              className={styles.smallButton}
+                              onClick={() => {
+                                history.push(`/topic/${category.value}`);
+                              }}
+                            >
                               {category.label}
                             </button>
                             <div
+                              title="bullet point"
                               className={styles.bulletPoint}
                               style={{ backgroundImage: `url(${bullet})` }}
                             />
@@ -151,6 +161,7 @@ const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
                     </button>
 
                     <div
+                      title="large bullet point"
                       className={styles.largeBulletPoint}
                       style={{ backgroundImage: `url(${largeBullet})` }}
                     />
