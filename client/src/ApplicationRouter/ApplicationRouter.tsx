@@ -11,6 +11,7 @@ import NeighborhoodPage from "../Public/NeighborhoodManagementPage/NeighborhoodP
 import TopicPage from "../Public/TopicManagementPage/TopicPage/TopicPage";
 import ContactPage from "../Public/ContactPage/ContactPage";
 import LogInPage from "../Admin/Containers/LogInPage";
+import AboutPage from "../Public/AboutPage";
 
 const ApplicationRouter = () => {
   return (
@@ -53,7 +54,10 @@ const ApplicationRouter = () => {
       <Route path="/contact">
         <ContactPage />
       </Route>
-      {/* <ProtectedRoute path="/admin" component={AdminPage} isAuth={false} /> */}
+
+      <Route path="/about">
+        <AboutPage />
+      </Route>
     </Switch>
   );
 };

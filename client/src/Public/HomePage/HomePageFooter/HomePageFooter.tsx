@@ -4,13 +4,16 @@ import dLogo from "./images/dLogo.png";
 import styles from "./HomePageFooter.module.scss";
 import Button from "../../../Components/Button";
 import { TownTypesOptions } from "../../../Admin/Containers/CreateStoryPage/helpers";
+import { Link } from "react-router-dom";
 
 const HomePageFooter = () => (
   <div className={styles.wrapper}>
     <div className={styles.body}>
       <Stack justify="space-between" className={styles.townWrapper}>
         {TownTypesOptions.map((town) => (
-          <p>{town.label}</p>
+          <Link to={`/neighborhood/${town.value}`}>
+            <p>{town.label}</p>
+          </Link>
         ))}
       </Stack>
 

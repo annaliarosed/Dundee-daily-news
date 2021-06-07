@@ -43,12 +43,13 @@ const NeighborhoodPage = () => {
         <Stack direction="vertical">
           <Stack align="center" className={styles.townHeaderWrapper}>
             <Link to="/neighborhood">
-              <p className={styles.backButton}>{`< neighborhood`}</p>
+              <p className={styles.backButton}>{`< Neighborhood`}</p>
             </Link>
             <h1 className={styles.townHeader}>{TownTypesMapping[town]}</h1>
           </Stack>
           <div className={styles.underlines} />
         </Stack>
+
         <div className={styles.storiesWrapper}>
           <TopStoryCard story={sortedStories[0]} />
           <Stack direction="vertical">

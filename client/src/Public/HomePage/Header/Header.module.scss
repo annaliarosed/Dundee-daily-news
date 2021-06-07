@@ -20,9 +20,15 @@
 }
 
 .menuIcon {
+  outline: none;
+  background-color: var(--main-color);
   transform: scale(0.5);
   justify-self: flex-start;
   transition: 0.5s;
+
+  &:focus {
+    transform: rotate(-90deg) scale(0.5);
+  }
 
   &:hover {
     cursor: pointer;

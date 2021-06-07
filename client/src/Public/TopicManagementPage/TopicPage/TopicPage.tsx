@@ -42,7 +42,7 @@ const TopicPage = () => {
         <Stack direction="vertical">
           <Stack align="center" className={styles.categoryHeaderWrapper}>
             <Link to="/topic">
-              <p className={styles.backButton}>{`< topic`}</p>
+              <p className={styles.backButton}>{`< Topic`}</p>
             </Link>
             <h1 className={styles.categoryHeader}>
               {CategoryTypesMapping[category]}

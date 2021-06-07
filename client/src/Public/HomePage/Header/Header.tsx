@@ -3,29 +3,30 @@ import styles from "./Header.module.scss";
 import menuIcon from "./images/menuIcon.png";
 import dundeeLogo from "./images/dundeeLogo.png";
 import Button from "../../../Components/Button";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import Menu from "../Menu";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const history = useHistory();
+  const location = useLocation();
 
   return (
     <header className={styles.wrapper}>
       <div className={styles.header}>
-        <img
-          className={styles.menuIcon}
-          src={menuIcon}
-          alt="menu icon"
-          onClick={() => setIsMenuOpen(true)}
-        />
+        <button className={styles.menuIcon} onClick={() => setIsMenuOpen(true)}>
+          <img src={menuIcon} alt="menu icon" />
+        </button>
 
-        <Link to="/">
-          <img
-            className={styles.dundeeLogo}
-            src={dundeeLogo}
-            alt="Dundee daily news logo"
-          />
-        </Link>
+        <img
+          tabIndex={location.pathname !== "/" ? 0 : undefined}
+          onClick={() => {
+            history.push("/");
+          }}
+          className={styles.dundeeLogo}
+          src={dundeeLogo}
+          alt="Dundee daily news logo"
+        />
 
         <Button className={styles.subscribeButton}>Subscribe</Button>
       </div>
