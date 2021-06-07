@@ -20,14 +20,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserResolver = void 0;
 const User_entity_1 = require("../entities/User.entity");
 const type_graphql_1 = require("type-graphql");
-const argon2_1 = __importDefault(require("argon2"));
+const constants_1 = require("../constants");
 let UserNamePasswordInput = class UserNamePasswordInput {
 };
 __decorate([
@@ -77,32 +74,11 @@ let UserResolver = class UserResolver {
             return user;
         });
     }
-    register(logInInput, { em, req }) {
+    login(logInInput, { em, req }) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (logInInput.username.length <= 5) {
-                return {
-                    errors: [
-                        {
-                            field: "username",
-                            message: "Length must be greater than 5",
-                        },
-                    ],
-                };
-            }
-            if (logInInput.password.length <= 5) {
-                return {
-                    errors: [
-                        {
-                            field: "password",
-                            message: "Length must be greater than 5",
-                        },
-                    ],
-                };
-            }
-            const hashedPassword = yield argon2_1.default.hash(logInInput.password);
             const user = em.create(User_entity_1.User, {
-                username: logInInput.username,
-                password: hashedPassword,
+                username: process.env.LOG_IN_USERNAME,
+                password: process.env.LOG_IN_PASSWORD,
             });
             try {
                 yield em.persistAndFlush(user);
@@ -110,19 +86,13 @@ let UserResolver = class UserResolver {
             catch (err) {
                 console.log("message: ", err.message);
             }
-            req.session.userId = user.id;
-            return { user };
-        });
-    }
-    login(logInInput, { em, req }) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const user = yield em.findOne(User_entity_1.User, { username: logInInput.username });
-            if (!user) {
+            if (user.username !== logInInput.username) {
                 return {
-                    errors: [{ field: "username", message: "that username doesn't exist" }],
+                    errors: [{ field: "username", message: "Wrong username" }],
                 };
             }
-            const valid = yield argon2_1.default.verify(user.password, logInInput.password);
+            const valid = (yield (user.password === logInInput.password)) &&
+                user.username === logInInput.username;
             if (!valid) {
                 return {
                     errors: [{ field: "password", message: "incorrect password" }],
@@ -132,6 +102,19 @@ let UserResolver = class UserResolver {
             return {
                 user,
             };
+        });
+    }
+    logout({ req, res }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve) => req.session.destroy((err) => {
+                res.clearCookie(constants_1.COOKIE_NAME);
+                if (err) {
+                    console.log(err);
+                    resolve(false);
+                    return;
+                }
+                resolve(true);
+            }));
         });
     }
 };
@@ -149,15 +132,14 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [UserNamePasswordInput, Object]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "register", null);
-__decorate([
-    type_graphql_1.Mutation(() => UserResponse),
-    __param(0, type_graphql_1.Arg("logInInput", () => UserNamePasswordInput)),
-    __param(1, type_graphql_1.Ctx()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [UserNamePasswordInput, Object]),
-    __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "login", null);
+__decorate([
+    type_graphql_1.Mutation(() => Boolean),
+    __param(0, type_graphql_1.Ctx()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "logout", null);
 UserResolver = __decorate([
     type_graphql_1.Resolver()
 ], UserResolver);

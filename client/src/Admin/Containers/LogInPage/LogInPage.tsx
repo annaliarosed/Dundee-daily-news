@@ -1,11 +1,10 @@
 import { TextField } from "@material-ui/core";
-import React, { useEffect } from "react";
+import React from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { Stack } from "../../../Components/Stack/Stack";
 import {
   useGetCurrentUserQuery,
   useLogInMutation,
-  useRegisterMutation,
 } from "../../../generated/graphql";
 import styles from "./LogInPage.module.scss";
 import { useHistory } from "react-router-dom";
@@ -21,32 +20,11 @@ const defaultValues = {
 };
 
 const LogInPage = () => {
-  const [register] = useRegisterMutation();
   const [logIn] = useLogInMutation();
   const history = useHistory();
-  const { data, loading, error } = useGetCurrentUserQuery();
-
-  console.log("me data", data?.me);
-
-  useEffect(() => {
-    const handleRegister = async () => {
-      const response = await register({
-        variables: {
-          username: "annalia",
-          password: "password",
-        },
-      });
-
-      if (response.data?.register.errors) {
-        console.log("Register error: ", response.data.register.errors);
-        return null;
-      }
-
-      console.log("registerdata", response.data?.register, "registerdata");
-    };
-
-    handleRegister();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const { data, loading, error, refetch } = useGetCurrentUserQuery({
+    fetchPolicy: "cache-and-network",
+  });
 
   const methods = useForm<LogInFormValues>({
     reValidateMode: "onChange",
@@ -61,27 +39,27 @@ const LogInPage = () => {
     formState: { errors },
   } = methods;
 
+  if (error || !data) {
+    return <div>Error</div>;
+  }
+
+  if (loading) {
+    return <div>loading.....</div>;
+  }
+
   const handleLogIn = async (values: LogInFormValues) => {
     try {
-      const logInResponse = await logIn({
+      await logIn({
         variables: {
           ...values,
         },
       });
 
-      if (logInResponse.data?.login.errors) {
-        logInResponse.data?.login.errors.forEach((error) => {
-          console.log(error.field, "error.field");
-          //@ts-expect-error: for ts issue where it can't tell type from template literal
-          setError(`${error.field}`, error);
-        });
-      } else {
-        history.push("/");
-      }
-
-      return logInResponse;
-    } catch (err) {
-      console.log("Log in error message: ", err.message);
+      await refetch();
+      history.push("/admin");
+    } catch (error) {
+      console.log(error.message);
+      return <div>{error.message}</div>;
     }
   };
 

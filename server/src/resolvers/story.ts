@@ -8,7 +8,9 @@ import {
   Mutation,
   InputType,
   Field,
+  UseMiddleware,
 } from "type-graphql";
+import { isAuth } from "../middleware/isAuth";
 
 //TODO Update resolvers
 @InputType()
@@ -97,6 +99,7 @@ export class StoryResolver {
   }
 
   @Mutation(() => Story)
+  @UseMiddleware(isAuth)
   async createStory(
     @Arg("input", () => CreateStoryInput) input: CreateStoryInput,
     @Ctx() ctx: MyContext
@@ -111,6 +114,7 @@ export class StoryResolver {
   }
 
   @Mutation(() => Story)
+  @UseMiddleware(isAuth)
   async updateStory(
     @Arg("id", () => Number) id: number,
     @Arg("input", () => UpdateStoryInput) input: UpdateStoryInput,
@@ -128,6 +132,7 @@ export class StoryResolver {
   }
 
   @Mutation(() => Boolean)
+  @UseMiddleware(isAuth)
   async deleteStory(
     @Arg("id", () => Number) id: number,
     @Ctx() ctx: MyContext

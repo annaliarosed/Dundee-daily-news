@@ -1,0 +1,46 @@
+.wrapper {
+  width: 100%;
+  background-color: #b4d4f2;
+  padding: 20px 0;
+
+  &.loggedOut {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+  }
+
+  &.logInPageWrapper {
+    position: relative;
+  }
+}
+
+.logOutWrapper {
+  margin: 0 auto;
+
+  p {
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 30px;
+    color: #6198cc;
+  }
+
+  &.logInPageNotAuth {
+    p {
+      font-weight: 200;
+      font-size: 20px;
+      text-decoration: none;
+    }
+  }
+}
+
+.button {
+  border: 2px solid #6198cc;
+  color: #6198cc;
+  background-color: #b4d4f2;
+  border-radius: 30px;
+  padding: 15px;
+  font-weight: bold;
+}

@@ -1,7 +1,10 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import React from "react";
 import Helmet from "react-helmet";
+import { useLocation } from "react-router";
+import AdminPageHeader from "./Admin/Containers/AdminPage/AdminPageHeader";
 import ApplicationRouter from "./ApplicationRouter";
+import { isProtectedPath } from "./utils/isProtectedPath";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -10,6 +13,7 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const location = useLocation();
   return (
     <>
       <ApolloProvider client={client}>
@@ -19,6 +23,8 @@ function App() {
         >
           {/* // TODO add favicon */}
         </Helmet>
+
+        {isProtectedPath(location.pathname) && <AdminPageHeader />}
         <ApplicationRouter />
       </ApolloProvider>
     </>

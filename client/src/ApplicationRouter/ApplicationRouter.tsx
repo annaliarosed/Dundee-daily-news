@@ -10,7 +10,6 @@ import TopicManagementPage from "../Public/TopicManagementPage";
 import NeighborhoodPage from "../Public/NeighborhoodManagementPage/NeighborhoodPage";
 import TopicPage from "../Public/TopicManagementPage/TopicPage/TopicPage";
 import ContactPage from "../Public/ContactPage/ContactPage";
-import ProtectedRoute from "../Components/ProtectedRoute";
 import LogInPage from "../Admin/Containers/LogInPage";
 
 const ApplicationRouter = () => {
@@ -19,9 +18,11 @@ const ApplicationRouter = () => {
       <Route exact path="/">
         <HomePage />
       </Route>
-      {/* <Route path="/admin">
+
+      <Route path="/admin">
         <AdminPage />
-      </Route> */}
+      </Route>
+
       <Route path="/log-in">
         <LogInPage />
       </Route>
@@ -29,9 +30,11 @@ const ApplicationRouter = () => {
       <Route path="/create">
         <CreateStoryPage />
       </Route>
+
       <Route path="/edit/:id">
         <EditStoryPage />
       </Route>
+
       <Route path="/story/:id">
         <StoryPage />
       </Route>
@@ -50,7 +53,7 @@ const ApplicationRouter = () => {
       <Route path="/contact">
         <ContactPage />
       </Route>
-      <ProtectedRoute path="/admin" component={AdminPage} isAuth={false} />
+      {/* <ProtectedRoute path="/admin" component={AdminPage} isAuth={false} /> */}
     </Switch>
   );
 };

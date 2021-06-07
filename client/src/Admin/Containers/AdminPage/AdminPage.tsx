@@ -12,7 +12,6 @@ import {
 
 import styles from "./AdminPage.module.scss";
 import { StoryType } from "../CreateStoryPage/helpers";
-import DeleteConfirmationModal from "./AdminPageTable/DeleteConfirmationModal";
 
 const AdminPage = () => {
   const { data, loading, error } = useGetStoriesQuery();

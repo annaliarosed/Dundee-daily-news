@@ -32,6 +32,7 @@ const StoryPage: React.FC<StoryPageProps> = () => {
   if (!story) {
     return null;
   }
+
   console.log(story);
 
   return (

@@ -10,7 +10,7 @@ import {
   ObjectType,
   Query,
 } from "type-graphql";
-import argon2 from "argon2";
+import { COOKIE_NAME } from "../constants";
 
 @InputType()
 class UserNamePasswordInput {
@@ -51,37 +51,14 @@ export class UserResolver {
   }
 
   @Mutation(() => UserResponse)
-  async register(
+  async login(
     @Arg("logInInput", () => UserNamePasswordInput)
     logInInput: UserNamePasswordInput,
     @Ctx() { em, req }: MyContext
   ): Promise<UserResponse> {
-    if (logInInput.username.length <= 5) {
-      return {
-        errors: [
-          {
-            field: "username",
-            message: "Length must be greater than 5",
-          },
-        ],
-      };
-    }
-
-    if (logInInput.password.length <= 5) {
-      return {
-        errors: [
-          {
-            field: "password",
-            message: "Length must be greater than 5",
-          },
-        ],
-      };
-    }
-
-    const hashedPassword = await argon2.hash(logInInput.password);
     const user = em.create(User, {
-      username: logInInput.username,
-      password: hashedPassword,
+      username: process.env.LOG_IN_USERNAME,
+      password: process.env.LOG_IN_PASSWORD,
     });
 
     try {
@@ -90,26 +67,15 @@ export class UserResolver {
       console.log("message: ", err.message);
     }
 
-    req.session.userId = user.id;
-
-    return { user };
-  }
-
-  @Mutation(() => UserResponse)
-  async login(
-    @Arg("logInInput", () => UserNamePasswordInput)
-    logInInput: UserNamePasswordInput,
-    @Ctx() { em, req }: MyContext
-  ): Promise<UserResponse> {
-    const user = await em.findOne(User, { username: logInInput.username });
-
-    if (!user) {
+    if (user.username !== logInInput.username) {
       return {
-        errors: [{ field: "username", message: "that username doesn't exist" }],
+        errors: [{ field: "username", message: "Wrong username" }],
       };
     }
 
-    const valid = await argon2.verify(user.password, logInInput.password);
+    const valid =
+      (await (user.password === logInInput.password)) &&
+      user.username === logInInput.username;
 
     if (!valid) {
       return {
@@ -122,5 +88,21 @@ export class UserResolver {
     return {
       user,
     };
+  }
+
+  @Mutation(() => Boolean)
+  async logout(@Ctx() { req, res }: MyContext) {
+    return new Promise((resolve) =>
+      req.session.destroy((err) => {
+        res.clearCookie(COOKIE_NAME);
+        if (err) {
+          console.log(err);
+          resolve(false);
+          return;
+        }
+
+        resolve(true);
+      })
+    );
   }
 }

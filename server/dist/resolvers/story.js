@@ -24,6 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.StoryResolver = void 0;
 const Story_entity_1 = require("../entities/Story.entity");
 const type_graphql_1 = require("type-graphql");
+const isAuth_1 = require("../middleware/isAuth");
 let CreateStoryInput = class CreateStoryInput {
 };
 __decorate([
@@ -187,6 +188,7 @@ __decorate([
 ], StoryResolver.prototype, "story", null);
 __decorate([
     type_graphql_1.Mutation(() => Story_entity_1.Story),
+    type_graphql_1.UseMiddleware(isAuth_1.isAuth),
     __param(0, type_graphql_1.Arg("input", () => CreateStoryInput)),
     __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
@@ -195,6 +197,7 @@ __decorate([
 ], StoryResolver.prototype, "createStory", null);
 __decorate([
     type_graphql_1.Mutation(() => Story_entity_1.Story),
+    type_graphql_1.UseMiddleware(isAuth_1.isAuth),
     __param(0, type_graphql_1.Arg("id", () => Number)),
     __param(1, type_graphql_1.Arg("input", () => UpdateStoryInput)),
     __param(2, type_graphql_1.Ctx()),
@@ -204,6 +207,7 @@ __decorate([
 ], StoryResolver.prototype, "updateStory", null);
 __decorate([
     type_graphql_1.Mutation(() => Boolean),
+    type_graphql_1.UseMiddleware(isAuth_1.isAuth),
     __param(0, type_graphql_1.Arg("id", () => Number)),
     __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),

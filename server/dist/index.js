@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
+require("dotenv/config");
 const core_1 = require("@mikro-orm/core");
 const mikro_orm_config_1 = __importDefault(require("./mikro-orm.config"));
 const apollo_server_express_1 = require("apollo-server-express");
@@ -48,7 +49,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
             secure: constants_1.__prod__,
         },
         saveUninitialized: false,
-        secret: "dfghgfscvfres",
+        secret: process.env.SESSION_SECRET,
         resave: false,
     }));
     const server = new apollo_server_express_1.ApolloServer({

@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import "dotenv/config";
 import { MikroORM } from "@mikro-orm/core";
 import microConfig from "./mikro-orm.config";
 import { ApolloServer } from "apollo-server-express";
@@ -45,7 +46,7 @@ const main = async () => {
       },
       saveUninitialized: false,
       // TODO ENV VARIABLE
-      secret: "dfghgfscvfres",
+      secret: process.env.SESSION_SECRET!,
       resave: false,
     })
   );
