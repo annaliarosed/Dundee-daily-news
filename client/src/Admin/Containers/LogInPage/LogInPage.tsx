@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { Stack } from "../../../Components/Stack/Stack";
 import {
+  useGetCurrentUserQuery,
   useLogInMutation,
   useRegisterMutation,
 } from "../../../generated/graphql";
@@ -23,6 +24,9 @@ const LogInPage = () => {
   const [register] = useRegisterMutation();
   const [logIn] = useLogInMutation();
   const history = useHistory();
+  const { data, loading, error } = useGetCurrentUserQuery();
+
+  console.log("me data", data?.me);
 
   useEffect(() => {
     const handleRegister = async () => {

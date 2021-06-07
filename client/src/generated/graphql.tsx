@@ -79,6 +79,7 @@ export type Query = {
   __typename?: 'Query';
   stories: Array<Story>;
   story?: Maybe<Story>;
+  me?: Maybe<User>;
 };
 
 
@@ -219,6 +220,17 @@ export type UpdateStoryMutation = (
     { __typename?: 'Story' }
     & StorySnippetFragment
   ) }
+);
+
+export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCurrentUserQuery = (
+  { __typename?: 'Query' }
+  & { me?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'username' | 'createdAt' | 'updatedAt'>
+  )> }
 );
 
 export type GetStoriesQueryVariables = Exact<{
@@ -444,6 +456,43 @@ export function useUpdateStoryMutation(baseOptions?: Apollo.MutationHookOptions<
 export type UpdateStoryMutationHookResult = ReturnType<typeof useUpdateStoryMutation>;
 export type UpdateStoryMutationResult = Apollo.MutationResult<UpdateStoryMutation>;
 export type UpdateStoryMutationOptions = Apollo.BaseMutationOptions<UpdateStoryMutation, UpdateStoryMutationVariables>;
+export const GetCurrentUserDocument = gql`
+    query GetCurrentUser {
+  me {
+    id
+    username
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+/**
+ * __useGetCurrentUserQuery__
+ *
+ * To run a query within a React component, call `useGetCurrentUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCurrentUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCurrentUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCurrentUserQuery(baseOptions?: Apollo.QueryHookOptions<GetCurrentUserQuery, GetCurrentUserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(GetCurrentUserDocument, options);
+      }
+export function useGetCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCurrentUserQuery, GetCurrentUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(GetCurrentUserDocument, options);
+        }
+export type GetCurrentUserQueryHookResult = ReturnType<typeof useGetCurrentUserQuery>;
+export type GetCurrentUserLazyQueryHookResult = ReturnType<typeof useGetCurrentUserLazyQuery>;
+export type GetCurrentUserQueryResult = Apollo.QueryResult<GetCurrentUserQuery, GetCurrentUserQueryVariables>;
 export const GetStoriesDocument = gql`
     query GetStories($townFilter: FilterQueryByTown, $categoryFilter: FilterQueryByCategory) {
   stories(townFilter: $townFilter, categoryFilter: $categoryFilter) {
