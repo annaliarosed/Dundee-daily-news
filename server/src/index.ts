@@ -63,7 +63,7 @@ const main = async () => {
 
   // serve static assets if in prod
 
-  if (__prod__) {
+  if (process.env.NODE_ENV === "production") {
     // set static folder
     app.use(express.static("client/build"));
     app.get("*", (req, res) => {
