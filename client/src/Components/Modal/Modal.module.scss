@@ -2,7 +2,7 @@
   display: none;
 
   &.open {
-    background-color: rgba(212, 212, 199, 0.8);
+    background-color: rgba(195, 217, 234, 0.5);
     position: fixed;
     top: 0;
     bottom: 0;
@@ -14,8 +14,13 @@
   }
 }
 
+// --menu-color: #c3d9ea;
+//   --menu-secondary-color: #212e62;
+
 .body {
-  background-color: blue;
+  background-color: var(--menu-color);
+  border: 3px solid var(--menu-secondary-color);
+
   width: 40vw;
   margin: 0 auto;
   padding: 10px;
@@ -23,10 +28,17 @@
 }
 
 .messageWrapper {
+  color: var(-menu-secondary-color);
   padding: 50px;
+
+  p,
+  h1 {
+    color: var(--menu-secondary-color);
+  }
 }
 
 .closeButton {
+  color: var(--menu-secondary-color);
   background-color: transparent;
   font-size: 35px;
   font-weight: bold;

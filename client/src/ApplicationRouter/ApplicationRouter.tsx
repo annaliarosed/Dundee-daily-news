@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 import HomePage from "../Public/HomePage";
 import AdminPage from "../Admin/Containers/AdminPage";
 import CreateStoryPage from "../Admin/Containers/CreateStoryPage";

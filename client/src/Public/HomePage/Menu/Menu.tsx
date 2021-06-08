@@ -15,7 +15,6 @@ import {
 } from "../../../Admin/Containers/CreateStoryPage/helpers";
 import { navOptions } from "../helpers";
 import { Link, useHistory } from "react-router-dom";
-import { Button } from "@material-ui/core";
 
 interface MenuProps {
   isOpen: boolean;

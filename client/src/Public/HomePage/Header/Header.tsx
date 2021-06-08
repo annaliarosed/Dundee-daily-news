@@ -3,7 +3,7 @@ import styles from "./Header.module.scss";
 import menuIcon from "./images/menuIcon.png";
 import dundeeLogo from "./images/dundeeLogo.png";
 import Button from "../../../Components/Button";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import Menu from "../Menu";
 
 function Header() {

@@ -5,7 +5,6 @@ import { Button, CircularProgress, Snackbar } from "@material-ui/core";
 
 import AdminPageTable from "./AdminPageTable/AdminPageTable";
 import {
-  GetStoriesQuery,
   useDeleteStoryMutation,
   useGetStoriesQuery,
 } from "../../../generated/graphql";

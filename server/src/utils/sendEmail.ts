@@ -1,6 +1,5 @@
 import nodemailer from "nodemailer";
 import "dotenv/config";
-import { stringify } from "querystring";
 
 export async function sendEmail(from: string, name: string, text: string) {
   let transporter = nodemailer.createTransport({

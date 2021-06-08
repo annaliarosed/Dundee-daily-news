@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Stack } from "../../Components/Stack/Stack";
 import { useSendEmailMutation } from "../../generated/graphql";
 import styles from "./ContactPage.module.scss";
-import { divide } from "ramda";
+
 import Modal from "../../Components/Modal";
 //TODO FINISH
 interface ContactPageFormValues {

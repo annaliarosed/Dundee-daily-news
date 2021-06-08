@@ -33,9 +33,9 @@ const LogInPage = () => {
 
   const {
     control,
-    getValues,
+
     handleSubmit,
-    setError,
+
     formState: { errors },
   } = methods;
 
