@@ -26,6 +26,12 @@ export type CreateStoryInput = {
   imgUrls: Array<Scalars['String']>;
 };
 
+export type EmailInput = {
+  email: Scalars['String'];
+  name: Scalars['String'];
+  message: Scalars['String'];
+};
+
 export type FieldError = {
   __typename?: 'FieldError';
   field: Scalars['String'];
@@ -47,6 +53,7 @@ export type Mutation = {
   deleteStory: Scalars['Boolean'];
   login: UserResponse;
   logout: Scalars['Boolean'];
+  sendEmail: Scalars['Boolean'];
 };
 
 
@@ -68,6 +75,11 @@ export type MutationDeleteStoryArgs = {
 
 export type MutationLoginArgs = {
   logInInput: UserNamePasswordInput;
+};
+
+
+export type MutationSendEmailArgs = {
+  emailInput: EmailInput;
 };
 
 export type Query = {
@@ -189,6 +201,16 @@ export type LogOutMutationVariables = Exact<{ [key: string]: never; }>;
 export type LogOutMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'logout'>
+);
+
+export type SendEmailMutationVariables = Exact<{
+  input: EmailInput;
+}>;
+
+
+export type SendEmailMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'sendEmail'>
 );
 
 export type UpdateStoryMutationVariables = Exact<{
@@ -394,6 +416,37 @@ export function useLogOutMutation(baseOptions?: Apollo.MutationHookOptions<LogOu
 export type LogOutMutationHookResult = ReturnType<typeof useLogOutMutation>;
 export type LogOutMutationResult = Apollo.MutationResult<LogOutMutation>;
 export type LogOutMutationOptions = Apollo.BaseMutationOptions<LogOutMutation, LogOutMutationVariables>;
+export const SendEmailDocument = gql`
+    mutation SendEmail($input: EmailInput!) {
+  sendEmail(emailInput: $input)
+}
+    `;
+export type SendEmailMutationFn = Apollo.MutationFunction<SendEmailMutation, SendEmailMutationVariables>;
+
+/**
+ * __useSendEmailMutation__
+ *
+ * To run a mutation, you first call `useSendEmailMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSendEmailMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [sendEmailMutation, { data, loading, error }] = useSendEmailMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useSendEmailMutation(baseOptions?: Apollo.MutationHookOptions<SendEmailMutation, SendEmailMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SendEmailMutation, SendEmailMutationVariables>(SendEmailDocument, options);
+      }
+export type SendEmailMutationHookResult = ReturnType<typeof useSendEmailMutation>;
+export type SendEmailMutationResult = Apollo.MutationResult<SendEmailMutation>;
+export type SendEmailMutationOptions = Apollo.BaseMutationOptions<SendEmailMutation, SendEmailMutationVariables>;
 export const UpdateStoryDocument = gql`
     mutation updateStory($id: Float!, $input: UpdateStoryInput!) {
   updateStory(id: $id, input: $input) {

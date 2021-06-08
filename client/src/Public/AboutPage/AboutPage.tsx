@@ -52,11 +52,11 @@ const AboutPage = () => {
               Erin <br /> Sauder
             </h4>
             <p>
-              Erin has been covering news in our neighborhood for the past 10
-              years as a freelance journalist for the Chicago Tribune and the
-              Courier. Before that she covered other Chicago area suburbs for
-              Shaw Media and other publications. Her interest in writing news
-              started when she was 10
+              Erin has been covering news as a freelance journalist in our
+              neighborhood for the past 10 years. Her work has been featured in
+              both the Chicago Tribune’s Courier-News and Shaw Media
+              publications. Prior to freelancing full-time, she worked for
+              several years covering other area suburbs for Suburban Life Media.
             </p>
           </div>
           <div className={styles.line} />

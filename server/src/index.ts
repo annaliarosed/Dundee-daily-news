@@ -45,7 +45,6 @@ const main = async () => {
         secure: __prod__, // cookie only works in https
       },
       saveUninitialized: false,
-      // TODO ENV VARIABLE
       secret: process.env.SESSION_SECRET!,
       resave: false,
     })

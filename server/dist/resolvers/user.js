@@ -25,6 +25,7 @@ exports.UserResolver = void 0;
 const User_entity_1 = require("../entities/User.entity");
 const type_graphql_1 = require("type-graphql");
 const constants_1 = require("../constants");
+const sendEmail_1 = require("../utils/sendEmail");
 let UserNamePasswordInput = class UserNamePasswordInput {
 };
 __decorate([
@@ -38,6 +39,23 @@ __decorate([
 UserNamePasswordInput = __decorate([
     type_graphql_1.InputType()
 ], UserNamePasswordInput);
+let EmailInput = class EmailInput {
+};
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], EmailInput.prototype, "email", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], EmailInput.prototype, "name", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], EmailInput.prototype, "message", void 0);
+EmailInput = __decorate([
+    type_graphql_1.InputType()
+], EmailInput);
 let FieldError = class FieldError {
 };
 __decorate([
@@ -117,6 +135,18 @@ let UserResolver = class UserResolver {
             }));
         });
     }
+    sendEmail(emailInput) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!emailInput.email) {
+                throw new Error("You must enter an email");
+            }
+            if (!emailInput.message) {
+                throw new Error("You must enter a message");
+            }
+            yield sendEmail_1.sendEmail(emailInput.email, emailInput.name, emailInput.message);
+            return true;
+        });
+    }
 };
 __decorate([
     type_graphql_1.Query(() => User_entity_1.User, { nullable: true }),
@@ -140,6 +170,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "logout", null);
+__decorate([
+    type_graphql_1.Mutation(() => Boolean),
+    __param(0, type_graphql_1.Arg("emailInput", () => EmailInput)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [EmailInput]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "sendEmail", null);
 UserResolver = __decorate([
     type_graphql_1.Resolver()
 ], UserResolver);

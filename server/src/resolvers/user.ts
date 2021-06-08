@@ -11,6 +11,7 @@ import {
   Query,
 } from "type-graphql";
 import { COOKIE_NAME } from "../constants";
+import { sendEmail } from "../utils/sendEmail";
 
 @InputType()
 class UserNamePasswordInput {
@@ -18,6 +19,17 @@ class UserNamePasswordInput {
   username: string;
   @Field()
   password: string;
+}
+
+@InputType()
+class EmailInput {
+  @Field()
+  email!: string;
+  @Field()
+  name!: string;
+
+  @Field()
+  message: string;
 }
 
 @ObjectType()
@@ -104,5 +116,23 @@ export class UserResolver {
         resolve(true);
       })
     );
+  }
+
+  @Mutation(() => Boolean)
+  async sendEmail(
+    @Arg("emailInput", () => EmailInput)
+    emailInput: EmailInput
+  ) {
+    if (!emailInput.email) {
+      throw new Error("You must enter an email");
+    }
+
+    if (!emailInput.message) {
+      throw new Error("You must enter a message");
+    }
+
+    await sendEmail(emailInput.email, emailInput.name, emailInput.message);
+
+    return true;
   }
 }
