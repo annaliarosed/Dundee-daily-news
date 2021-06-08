@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import "dotenv/config";
 import { MikroORM } from "@mikro-orm/core";
+import path from "path";
 import microConfig from "./mikro-orm.config";
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
@@ -59,6 +60,16 @@ const main = async () => {
   });
 
   server.applyMiddleware({ app, cors: false });
+
+  // serve static assets if in prod
+
+  if (__prod__) {
+    // set static folder
+    app.use(express.static("client/build"));
+    app.get("*", (req, res) => {
+      res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    });
+  }
 
   app.listen(4000, () => console.log("server ready at localhost:4000"));
 };

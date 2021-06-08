@@ -11,10 +11,11 @@
     "start": "ts-node dist/index.js",
     "start2": "ts-node src/index.ts",
     "dev2": "nodemon --exec ts-node src/index.ts",
-    "create:migration": "mikro-orm migration:create"
+    "create:migration": "mikro-orm migration:create",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
-  "author": "",
+  "author": "Annalia DeStefano",
   "license": "ISC",
   "dependencies": {
     "@mikro-orm/cli": "^4.5.5",
