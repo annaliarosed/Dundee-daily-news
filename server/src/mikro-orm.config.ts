@@ -15,7 +15,8 @@ export default {
   },
   entities: [Story, User],
   password: "serenity12",
-  dbName: "DUNDEEDAILYDB",
+  dbName: "dundwbzn_DUNDEEDAILYDB",
+  //dbName: "DUNDEEDAILYDB",
   type: "mysql",
   debug: !__prod__,
 } as Parameters<typeof MikroORM.init>[0];
