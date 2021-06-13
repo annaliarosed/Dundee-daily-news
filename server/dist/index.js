@@ -21,25 +21,27 @@ const express_1 = __importDefault(require("express"));
 const type_graphql_1 = require("type-graphql");
 const story_1 = require("./resolvers/story");
 const user_1 = require("./resolvers/user");
-const redis_1 = __importDefault(require("redis"));
+const ioredis_1 = __importDefault(require("ioredis"));
 const express_session_1 = __importDefault(require("express-session"));
 const connect_redis_1 = __importDefault(require("connect-redis"));
 const constants_1 = require("./constants");
 const cors_1 = __importDefault(require("cors"));
+console.log("process.env.CORS_ORIGIN", process.env.CORS_ORIGIN);
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const orm = yield core_1.MikroORM.init(mikro_orm_config_1.default);
     yield orm.getMigrator().up();
     const app = express_1.default();
+    const RedisStore = connect_redis_1.default(express_session_1.default);
+    const redis = new ioredis_1.default(process.env.REDIS_URL);
+    app.set("proxy", 1);
     app.use(cors_1.default({
-        origin: "http://localhost:3000",
+        origin: process.env.CORS_ORIGIN,
         credentials: true,
     }));
-    const RedisStore = connect_redis_1.default(express_session_1.default);
-    const redisClient = redis_1.default.createClient();
     app.use(express_session_1.default({
         name: "sauderkraut",
         store: new RedisStore({
-            client: redisClient,
+            client: redis,
             disableTouch: true,
         }),
         cookie: {
@@ -47,6 +49,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
             httpOnly: true,
             sameSite: "lax",
             secure: constants_1.__prod__,
+            domain: constants_1.__prod__ ? ".dundeedaily.news" : undefined,
         },
         saveUninitialized: false,
         secret: process.env.SESSION_SECRET,
@@ -59,8 +62,15 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         }),
         context: ({ req, res }) => ({ em: orm.em, req, res }),
     });
-    server.applyMiddleware({ app, cors: false });
-    app.listen(4000, () => console.log("server ready at localhost:4000"));
+    const corsOptions = {
+        origin: process.env.CORS_ORIGIN,
+        credentials: true,
+    };
+    server.applyMiddleware({
+        app,
+        cors: corsOptions,
+    });
+    app.listen(process.env.PORT, () => console.log("server ready at localhost:4000"));
 });
-main().catch((err) => console.error(err));
+main().catch((err) => console.error("err: ", err));
 //# sourceMappingURL=index.js.map

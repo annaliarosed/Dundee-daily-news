@@ -20,7 +20,7 @@ export const AdminPageHeader = () => {
   const isProtectedPage = isProtectedPath(location.pathname);
 
   if (error || !data) {
-    return <div>Error</div>;
+    return <div>error: {error?.message}</div>;
   }
 
   if (loading) {

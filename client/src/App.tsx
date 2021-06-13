@@ -1,17 +1,19 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import "dotenv/config";
 import React from "react";
 import Helmet from "react-helmet";
 import { useLocation } from "react-router";
 import AdminPageHeader from "./Admin/Containers/AdminPage/AdminPageHeader";
 import ApplicationRouter from "./ApplicationRouter";
 import { isProtectedPath } from "./utils/isProtectedPath";
+//require("dotenv").config({ path: __dirname + "/.env" });
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
+  uri: process.env.REACT_APP_API_URL,
   cache: new InMemoryCache(),
   credentials: "include",
 });
-
+console.log("process.env.REACT_APP_API_URL", process.env.REACT_APP_API_URL);
 function App() {
   const location = useLocation();
   return (
