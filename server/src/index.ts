@@ -7,22 +7,21 @@ import express from "express";
 import { buildSchema } from "type-graphql";
 import { StoryResolver } from "./resolvers/story";
 import { UserResolver } from "./resolvers/user";
-import Redis from "ioredis";
+//import Redis from "ioredis";
 import session from "express-session";
-import connectRedis from "connect-redis";
+//import connectRedis from "connect-redis";
 import { __prod__ } from "./constants";
-
 import cors from "cors";
-console.log("process.env.CORS_ORIGIN", process.env.CORS_ORIGIN);
 
+console.log("PORT", process.env.DATABASE_URL);
 const main = async () => {
   const orm = await MikroORM.init(microConfig);
   await orm.getMigrator().up();
 
   const app = express();
 
-  const RedisStore = connectRedis(session);
-  const redis = new Redis(process.env.REDIS_URL);
+  // const RedisStore = connectRedis(session);
+  // const redis = new Redis(process.env.REDIS_URL);
   app.set("proxy", 1);
 
   app.use(
@@ -35,10 +34,10 @@ const main = async () => {
   app.use(
     session({
       name: "sauderkraut",
-      store: new RedisStore({
-        client: redis,
-        disableTouch: true,
-      }),
+      // store: new RedisStore({
+      //   client: redis,
+      //   disableTouch: true,
+      // }),
 
       cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years,
@@ -61,14 +60,9 @@ const main = async () => {
     context: ({ req, res }) => ({ em: orm.em, req, res }),
   });
 
-  const corsOptions = {
-    origin: process.env.CORS_ORIGIN,
-    credentials: true,
-  };
-
   server.applyMiddleware({
     app,
-    cors: corsOptions,
+    cors: false,
   });
 
   app.listen(process.env.PORT, () =>

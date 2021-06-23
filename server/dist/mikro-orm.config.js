@@ -8,15 +8,13 @@ const constants_1 = require("./constants");
 const Story_entity_1 = require("./entities/Story.entity");
 const path_1 = __importDefault(require("path"));
 const User_entity_1 = require("./entities/User.entity");
-console.log(process.env.MIKRO_ORM_USER, "process.env.MIKRO_ORM_USER");
 exports.default = {
     migrations: {
-        path: path_1.default.join("/Users/annaliadestefano/personal/dundee-daily-news/server/src", "./migrations"),
+        path: path_1.default.join(__dirname, "./migrations"),
         pattern: /^[\w-]+\d+\.[tj]s$/,
     },
-    clientUrl: process.env.DATABASE_DEFAULT_URL,
     entities: [Story_entity_1.Story, User_entity_1.User],
-    password: "serenity12",
+    password: "@Serenity1122004",
     dbName: "DUNDEEDAILYDB",
     type: "mysql",
     debug: !constants_1.__prod__,

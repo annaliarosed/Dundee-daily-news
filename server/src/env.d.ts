@@ -6,9 +6,7 @@ declare namespace NodeJS {
     NODE_MAILER_PASSWORD: string;
     GMAIL_PASSWORD: string;
     NAME_CHEAP_PASSWORD: string;
-    DATABASE_DEFAULT_URL: string;
-    DATABASE_URL: string;
-    REDIS_URL: string;
+    ip: string;
     PORT: string;
     CORS_ORIGIN: string;
   }
