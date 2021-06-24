@@ -12,6 +12,7 @@ import TopicPage from "../Public/TopicManagementPage/TopicPage/TopicPage";
 import ContactPage from "../Public/ContactPage/ContactPage";
 import LogInPage from "../Admin/Containers/LogInPage";
 import AboutPage from "../Public/AboutPage";
+import SubscriptionPage from "../Public/SubscriptionPage";
 
 const ApplicationRouter = () => {
   return (
@@ -53,6 +54,10 @@ const ApplicationRouter = () => {
       </Route>
       <Route path="/contact">
         <ContactPage />
+      </Route>
+
+      <Route path="/subscribe">
+        <SubscriptionPage />
       </Route>
 
       <Route path="/about">
