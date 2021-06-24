@@ -28,7 +28,12 @@ function Header() {
           alt="Dundee daily news logo"
         />
 
-        <Button className={styles.subscribeButton}>Subscribe</Button>
+        <Button
+          className={styles.subscribeButton}
+          onClick={() => history.push("/subscribe")}
+        >
+          Subscribe
+        </Button>
       </div>
       <div className={styles.underlines}></div>
 

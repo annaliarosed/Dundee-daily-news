@@ -43,3 +43,9 @@
 .subscribeButton {
   justify-self: flex-end;
 }
+
+@media only screen and (max-width: 650px) {
+  .subscribeButton {
+    display: none;
+  }
+}

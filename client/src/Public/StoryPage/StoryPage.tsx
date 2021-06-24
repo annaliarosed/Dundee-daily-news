@@ -54,7 +54,7 @@ const StoryPage: React.FC<StoryPageProps> = () => {
                 }}
               />
             </div>
-            <p>{/* {story.caption} */}</p>
+            <p>{story.caption}</p>
           </Stack>
         </div>
 

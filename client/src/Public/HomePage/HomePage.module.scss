@@ -24,5 +24,10 @@
     grid-template-columns: 1fr;
     grid-template-rows: none;
     grid-gap: 40px;
+    position: relative;
+  }
+
+  .storyCards {
+    margin-top: 650px;
   }
 }

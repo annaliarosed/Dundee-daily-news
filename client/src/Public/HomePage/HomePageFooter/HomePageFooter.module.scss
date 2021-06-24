@@ -18,6 +18,22 @@
   border-bottom: 1px solid black;
 }
 
+.townLink {
+  background-color: transparent;
+  font-size: 15px;
+  padding: 15px 0px;
+  outline: none;
+
+  &:focus {
+    text-decoration: underline;
+  }
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
 .footer {
   display: grid;
   align-items: center;
@@ -46,11 +62,28 @@
   }
 }
 
-@media only screen and (max-width: 850px) {
+.facebookLink {
+  outline: none;
+
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+@media only screen and (max-width: 650px) {
   .townWrapper {
     padding: 3px 0;
-    > p {
+    > a {
       display: none;
     }
+  }
+
+  .footer {
+    grid-template-columns: 1fr;
+    padding: 20px 0;
+  }
+
+  .suggestButton {
+    justify-self: center;
   }
 }

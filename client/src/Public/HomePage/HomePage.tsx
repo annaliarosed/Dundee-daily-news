@@ -9,7 +9,6 @@ import TopStoryCard from "./TopStoryCard";
 import { sortChronologically } from "../../utils/sortChronologically";
 import StoryCard from "./StoryCard";
 import HomePageFooter from "./HomePageFooter";
-import { Link } from "react-router-dom";
 
 import cn from "classnames";
 
@@ -34,16 +33,16 @@ const HomePage = () => {
       <div className={styles.wrapper}>
         <TopStoryCard story={sortedStories[0]} />
 
-        <Stack direction="vertical">
+        <Stack direction="vertical" className={styles.storyCards}>
           {sortedStories.slice(1, 7).map((story, index) => (
-            <Link key={story.id} to={`/story/${story.id}`}>
+            <>
               <StoryCard story={story} />
               <div
                 className={cn(styles.bottomBorder, {
                   [styles.last]: index === 5,
                 })}
               />
-            </Link>
+            </>
           ))}
         </Stack>
       </div>

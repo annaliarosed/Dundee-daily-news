@@ -19,8 +19,8 @@ const TopStoryCard: React.FC<TopStoryCardProps> = ({ story }) => {
 
   return (
     <div className={styles.wrapper}>
-      <Link to={`/story/${story.id}`}>
-        <div className={styles.photoWrapper}>
+      <Link tabIndex={-1} to={`/story/${story.id}`}>
+        <button className={styles.photoWrapper}>
           <div
             className={styles.photo}
             title={story.altText}
@@ -31,13 +31,13 @@ const TopStoryCard: React.FC<TopStoryCardProps> = ({ story }) => {
             }}
           />
           <div className={cn(styles.photoBackground, styles[story.town])} />
-        </div>
+        </button>
       </Link>
       <h2>{story.head}</h2>
       <p className={styles.date}>
         {moment(Number(story.createdAt)).format("MMMM D, YYYY")}
       </p>
-      <TownLozenge town={story.town} />
+      <TownLozenge tabIndex={0} town={story.town} />
       <div className={styles.text}>
         <p>{story.subHead}</p>
         <p>{` ${
@@ -46,14 +46,20 @@ const TopStoryCard: React.FC<TopStoryCardProps> = ({ story }) => {
             : story.storyText.split(" ").slice(0, 40).join(" ")
         }...`}</p>
       </div>
-      <Button>More</Button>
-      <div className={styles.adWrapper}>
-        <img
-          className={styles.ad}
-          src={dundeeAd}
-          alt="Dundee ad to subscribe"
-        />
-      </div>
+
+      <Link tabIndex={-1} to={`/story/${story.id}`}>
+        <Button className={styles.moreButton}>More</Button>
+      </Link>
+
+      <Link tabIndex={-1} to={`/subscribe`}>
+        <div className={styles.adWrapper}>
+          <img
+            className={styles.ad}
+            src={dundeeAd}
+            alt="Dundee ad to subscribe"
+          />
+        </div>
+      </Link>
     </div>
   );
 };

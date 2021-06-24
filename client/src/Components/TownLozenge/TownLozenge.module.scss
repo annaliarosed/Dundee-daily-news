@@ -10,6 +10,8 @@
   letter-spacing: 3px;
   font-weight: var(--font-bold);
   font-size: 12px;
+  outline: none;
+  transition: 0.5s;
 
   &.east_dundee {
     background-color: var(--east-dundee-color);
@@ -29,5 +31,9 @@
 
   &.algonquin {
     background-color: var(--algonquin-color);
+  }
+
+  &:focus {
+    transform: rotate(360deg);
   }
 }

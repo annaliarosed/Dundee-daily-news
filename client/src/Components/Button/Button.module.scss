@@ -6,4 +6,12 @@
   background-color: var(--secondary-color);
   border: 1px solid black;
   text-transform: uppercase;
+
+  outline: none;
+
+  &:focus {
+    background-color: black;
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+  }
 }
