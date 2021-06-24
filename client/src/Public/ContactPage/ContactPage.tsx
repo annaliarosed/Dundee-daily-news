@@ -6,6 +6,9 @@ import { useSendEmailMutation } from "../../generated/graphql";
 import styles from "./ContactPage.module.scss";
 
 import Modal from "../../Components/Modal";
+import Header from "../HomePage/Header";
+import HomePageFooter from "../HomePage/HomePageFooter";
+import Button from "../../Components/Button/Button";
 //TODO FINISH
 interface ContactPageFormValues {
   email: string;
@@ -17,15 +20,8 @@ interface ContactPageFormValues {
 const defaultValues = {
   email: "",
   name: "",
-
   message: "",
 };
-
-//email: String!
-// name: String!
-
-// message: String!
-// }
 
 const ContactPage = () => {
   const [sendEmail] = useSendEmailMutation();
@@ -67,50 +63,58 @@ const ContactPage = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h1>Send us an email!</h1>
-      <form onSubmit={handleSubmit(handleSendEmail)}>
-        <Stack direction="vertical">
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                variant="outlined"
-                label="Email"
-                className={styles.field}
-              />
-            )}
-            name="email"
-            control={control}
-          />
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                variant="outlined"
-                label="Name"
-                className={styles.field}
-              />
-            )}
-            name="name"
-            control={control}
-          />
+      <Header />
 
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                variant="outlined"
-                label="message"
-                className={styles.field}
+      <Stack direction="vertical" align="center" className={styles.fomWrapper}>
+        <h1>Send us an email!</h1>
+        <form onSubmit={handleSubmit(handleSendEmail)} className={styles.form}>
+          <Stack direction="vertical">
+            <div className={styles.field}>
+              <Controller
+                render={({ field }) => (
+                  <TextField {...field} variant="outlined" label="Email" />
+                )}
+                name="email"
+                control={control}
               />
-            )}
-            name="message"
-            control={control}
-          />
-        </Stack>
+            </div>
 
-        <button type="submit">send email</button>
-      </form>
+            <div className={styles.field}>
+              <Controller
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    variant="outlined"
+                    label="Name"
+                    className={styles.field}
+                  />
+                )}
+                name="name"
+                control={control}
+              />
+            </div>
+
+            <div className={styles.field}>
+              <Controller
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    multiline
+                    rows={5}
+                    variant="outlined"
+                    label="message"
+                    className={styles.field}
+                  />
+                )}
+                name="message"
+                control={control}
+              />
+            </div>
+          </Stack>
+
+          <Button type="submit">send email</Button>
+        </form>
+      </Stack>
 
       {
         <Modal
@@ -120,6 +124,8 @@ const ContactPage = () => {
           onClose={() => setEmailSent(false)}
         />
       }
+
+      <HomePageFooter />
     </div>
   );
 };
