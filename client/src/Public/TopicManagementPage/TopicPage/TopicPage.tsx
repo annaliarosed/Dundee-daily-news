@@ -41,8 +41,8 @@ const TopicPage = () => {
       <div className={styles.body}>
         <Stack direction="vertical">
           <Stack align="center" className={styles.categoryHeaderWrapper}>
-            <Link to="/topic">
-              <p className={styles.backButton}>{`< Topic`}</p>
+            <Link tabIndex={-1} to="/topic">
+              <button className={styles.backButton}>{`< Topic`}</button>
             </Link>
             <h1 className={styles.categoryHeader}>
               {CategoryTypesMapping[category]}
@@ -50,21 +50,27 @@ const TopicPage = () => {
           </Stack>
           <div className={styles.underlines} />
         </Stack>
-        <div className={styles.storiesWrapper}>
-          <TopStoryCard story={sortedStories[0]} />
-          <Stack direction="vertical">
-            {sortedStories.slice(1, 7).map((story, index) => (
-              <Link key={story.id} to={`/story/${story.id}`}>
-                <StoryCard story={story} />
-                <div
-                  className={cn(styles.bottomBorder, {
-                    [styles.last]: index === 5,
-                  })}
-                />
-              </Link>
-            ))}
-          </Stack>
-        </div>
+        {stories.length === 0 ? (
+          <div className={styles.emptyState}>
+            No stories yet in this category, come back later to check for more!
+          </div>
+        ) : (
+          <div className={styles.storiesWrapper}>
+            <TopStoryCard story={sortedStories[0]} />
+            <Stack direction="vertical">
+              {sortedStories.slice(1, 7).map((story, index) => (
+                <Link key={story.id} to={`/story/${story.id}`}>
+                  <StoryCard story={story} />
+                  <div
+                    className={cn(styles.bottomBorder, {
+                      [styles.last]: index === 5,
+                    })}
+                  />
+                </Link>
+              ))}
+            </Stack>
+          </div>
+        )}
       </div>
       <HomePageFooter />
     </div>

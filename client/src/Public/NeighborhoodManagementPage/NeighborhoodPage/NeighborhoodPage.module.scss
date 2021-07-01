@@ -20,6 +20,11 @@
 
 .backButton {
   font-style: var(--font-italic-style);
+  outline: none;
+
+  &:focus {
+    text-decoration: underline;
+  }
 }
 
 .townHeader {

@@ -12,6 +12,16 @@
   justify-items: center;
 }
 
+.logoButton {
+  outline: none;
+
+  &:focus {
+    .dundeeLogo {
+      transform: scale(0.6);
+    }
+  }
+}
+
 .underlines {
   border-bottom: 1px solid black;
   border-top: 1px solid #000;
@@ -38,6 +48,7 @@
 
 .dundeeLogo {
   transform: scale(0.5);
+  transition: 0.5s;
 }
 
 .subscribeButton {

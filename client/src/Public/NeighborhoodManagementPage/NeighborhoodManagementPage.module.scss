@@ -142,6 +142,11 @@
   max-width: 500px;
   min-width: 300px;
   background-color: var(--secondary-color);
+  outline: none;
+
+  &:focus {
+    border: 1px solid black;
+  }
 }
 
 .ad {

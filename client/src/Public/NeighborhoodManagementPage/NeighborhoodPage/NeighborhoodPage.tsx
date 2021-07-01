@@ -42,8 +42,8 @@ const NeighborhoodPage = () => {
       <div className={styles.body}>
         <Stack direction="vertical">
           <Stack align="center" className={styles.townHeaderWrapper}>
-            <Link to="/neighborhood">
-              <p className={styles.backButton}>{`< Neighborhood`}</p>
+            <Link tabIndex={-1} to="/neighborhood">
+              <button className={styles.backButton}>{`< Neighborhood`}</button>
             </Link>
             <h1 className={styles.townHeader}>{TownTypesMapping[town]}</h1>
           </Stack>
@@ -54,14 +54,14 @@ const NeighborhoodPage = () => {
           <TopStoryCard story={sortedStories[0]} />
           <Stack direction="vertical">
             {sortedStories.slice(1, 7).map((story, index) => (
-              <Link key={story.id} to={`/story/${story.id}`}>
+              <>
                 <StoryCard story={story} />
                 <div
                   className={cn(styles.bottomBorder, {
                     [styles.last]: index === 5,
                   })}
                 />
-              </Link>
+              </>
             ))}
           </Stack>
         </div>

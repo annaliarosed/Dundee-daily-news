@@ -51,13 +51,15 @@ const NeighborhoodManagementPage = () => {
             ))}
           </Stack>
 
-          <div className={styles.dundeeAdWrapper}>
-            <img
-              className={styles.ad}
-              src={dundeeAd}
-              alt="dundee ad to subscribe"
-            />
-          </div>
+          <Link tabIndex={-1} to="/subscribe">
+            <button tabIndex={0} className={styles.dundeeAdWrapper}>
+              <img
+                className={styles.ad}
+                src={dundeeAd}
+                alt="dundee ad to subscribe"
+              />
+            </button>
+          </Link>
         </div>
       </div>
       <HomePageFooter />

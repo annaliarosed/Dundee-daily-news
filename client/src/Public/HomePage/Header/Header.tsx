@@ -18,15 +18,19 @@ function Header() {
           <img src={menuIcon} alt="menu icon" />
         </button>
 
-        <img
-          tabIndex={location.pathname !== "/" ? 0 : undefined}
+        <button
+          tabIndex={location.pathname !== "/" ? 0 : -1}
           onClick={() => {
             history.push("/");
           }}
-          className={styles.dundeeLogo}
-          src={dundeeLogo}
-          alt="Dundee daily news logo"
-        />
+          className={styles.logoButton}
+        >
+          <img
+            className={styles.dundeeLogo}
+            src={dundeeLogo}
+            alt="Dundee daily news logo"
+          />
+        </button>
 
         <Button
           className={styles.subscribeButton}

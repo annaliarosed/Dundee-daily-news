@@ -4,7 +4,56 @@
 }
 
 .body {
-  max-width: 999px;
+  //fix
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 100px;
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  gap: 40px;
+}
+
+.underlines {
+  border-bottom: 1px solid black;
+  border-top: 1px solid #000;
+  height: 6px;
+  margin: 0 40px;
+}
+
+.headerWrapper {
+  border-bottom: 1px solid black;
+}
+
+.header {
+  font-weight: var(--font-extra-bold);
+  font-size: 60px;
+}
+
+.bodyText {
+  font-style: var(--font-italic-style);
+  color: var(--secondary-text);
+  line-height: 2;
+  margin-right: 70px;
+  font-size: 17px;
+}
+
+.email {
+  text-decoration: underline;
+  color: var(--secondary-text);
+}
+
+.dundeeAdWrapper {
+  z-index: 4;
+  max-width: 500px;
+  min-width: 300px;
+  background-color: var(--secondary-color);
+  outline: none;
+
+  &:focus {
+    border: 1px solid black;
+  }
+}
+
+.ad {
+  transform: scale(0.5);
+  transform-origin: center;
 }

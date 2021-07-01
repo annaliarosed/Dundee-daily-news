@@ -52,13 +52,13 @@ const TopicManagementPage = () => {
             ))}
           </Stack>
 
-          <div className={styles.dundeeAdWrapper}>
+          <button className={styles.dundeeAdWrapper}>
             <img
               className={styles.ad}
               src={dundeeAd}
               alt="dundee ad to subscribe"
             />
-          </div>
+          </button>
         </div>
       </div>
       <HomePageFooter />

@@ -45,7 +45,7 @@ button {
   font-family: "Newsreader", serif;
   border: none;
   border-radius: 5px;
-  background-color: white;
+  background-color: var(--main-color);
   min-width: 50px;
 
   transition: 0.5s;

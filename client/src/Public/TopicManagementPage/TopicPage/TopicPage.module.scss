@@ -20,6 +20,11 @@
 
 .backButton {
   font-style: var(--font-italic-style);
+  outline: none;
+
+  &:focus {
+    text-decoration: underline;
+  }
 }
 
 .categoryHeader {
@@ -40,6 +45,12 @@
   &.last {
     display: none;
   }
+}
+
+.emptyState {
+  width: 40vw;
+  margin: 0 auto;
+  padding: 200px;
 }
 
 @media only screen and (max-width: 850px) {
