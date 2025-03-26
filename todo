@@ -1,11 +1,10 @@
 - fix all error messages
 
-
 tmrw:
+
 - change date format too number and remove Number() from code
 - update edit mutation input in backend
--set up form in editing page
-
+  -set up form in editing page
 
 MOBILE
 -header
@@ -14,16 +13,12 @@ MOBILE
 fix tabbing for everythingg
 custom outlines
 
-
-
-
-
 fix footer spacing
-
-
 
 .zip and send to andy
 
-
 inconsistency betweein suuggest a story email and contact page
 http://localhost:3000/topic/editorial = goes to log in page?
+
+remove password from docker-compose
+formatting in text field

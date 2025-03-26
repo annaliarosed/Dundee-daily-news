@@ -12,8 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-require("reflect-metadata");
 require("dotenv/config");
+require("reflect-metadata");
 const core_1 = require("@mikro-orm/core");
 const mikro_orm_config_1 = __importDefault(require("./mikro-orm.config"));
 const apollo_server_express_1 = require("apollo-server-express");
@@ -24,17 +24,18 @@ const user_1 = require("./resolvers/user");
 const express_session_1 = __importDefault(require("express-session"));
 const constants_1 = require("./constants");
 const cors_1 = __importDefault(require("cors"));
-console.log("PORT", process.env.DATABASE_URL);
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const orm = yield core_1.MikroORM.init(mikro_orm_config_1.default);
     yield orm.getMigrator().up();
-    const app = express_1.default();
+    const app = (0, express_1.default)();
+    console.log("ALL ENV:", process.env);
+    console.log("SESSION_SECRET is:", process.env.SESSION_SECRET);
     app.set("proxy", 1);
-    app.use(cors_1.default({
+    app.use((0, cors_1.default)({
         origin: process.env.CORS_ORIGIN,
         credentials: true,
     }));
-    app.use(express_session_1.default({
+    app.use((0, express_session_1.default)({
         name: "sauderkraut",
         cookie: {
             maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
@@ -44,11 +45,11 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
             domain: constants_1.__prod__ ? ".dundeedaily.news" : undefined,
         },
         saveUninitialized: false,
-        secret: process.env.SESSION_SECRET,
+        secret: process.env.SESSION_SECRET || "something",
         resave: false,
     }));
     const server = new apollo_server_express_1.ApolloServer({
-        schema: yield type_graphql_1.buildSchema({
+        schema: yield (0, type_graphql_1.buildSchema)({
             resolvers: [story_1.StoryResolver, user_1.UserResolver],
             validate: false,
         }),

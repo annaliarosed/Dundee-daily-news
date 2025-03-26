@@ -1,5 +1,5 @@
-import "reflect-metadata";
 import "dotenv/config";
+import "reflect-metadata";
 import { MikroORM } from "@mikro-orm/core";
 import microConfig from "./mikro-orm.config";
 import { ApolloServer } from "apollo-server-express";
@@ -13,12 +13,14 @@ import session from "express-session";
 import { __prod__ } from "./constants";
 import cors from "cors";
 
-console.log("PORT", process.env.DATABASE_URL);
 const main = async () => {
   const orm = await MikroORM.init(microConfig);
   await orm.getMigrator().up();
 
   const app = express();
+  console.log("ALL ENV:", process.env);
+
+  console.log("SESSION_SECRET is:", process.env.SESSION_SECRET);
 
   // const RedisStore = connectRedis(session);
   // const redis = new Redis(process.env.REDIS_URL);
@@ -47,7 +49,7 @@ const main = async () => {
         domain: __prod__ ? ".dundeedaily.news" : undefined,
       },
       saveUninitialized: false,
-      secret: process.env.SESSION_SECRET,
+      secret: process.env.SESSION_SECRET || "something",
       resave: false,
     })
   );

@@ -6,17 +6,16 @@ import path from "path";
 import { User } from "./entities/User.entity";
 
 export default {
+  type: "mysql",
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  dbName: process.env.DB_NAME,
+  debug: !__prod__,
+  entities: [Story, User],
   migrations: {
     path: path.join(__dirname, "./migrations"),
     pattern: /^[\w-]+\d+\.[tj]s$/,
   },
-  //clientUrl: process.env.DATABASE_URL,
-  entities: [Story, User],
-  password: "@Serenity1122004",
-  //dbName: "dundwbzn_DUNDEEDAILYDB",
-  dbName: "DUNDEEDAILYDB",
-  //port: 443,
-  type: "mysql",
-
-  debug: !__prod__,
 } as Parameters<typeof MikroORM.init>[0];

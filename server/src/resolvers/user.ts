@@ -68,38 +68,64 @@ export class UserResolver {
     logInInput: UserNamePasswordInput,
     @Ctx() { em, req }: MyContext
   ): Promise<UserResponse> {
-    const user = em.create(User, {
-      username: process.env.LOG_IN_USERNAME,
-      password: process.env.LOG_IN_PASSWORD,
-    });
+    const user = await em.findOne(User, { username: logInInput.username });
 
-    try {
-      await em.persistAndFlush(user);
-    } catch (err) {
-      console.log("message: ", err.message);
-    }
-
-    if (user.username !== logInInput.username) {
+    if (!user) {
       return {
         errors: [{ field: "username", message: "Wrong username" }],
       };
     }
 
-    const valid =
-      (await (user.password === logInInput.password)) &&
-      user.username === logInInput.username;
+    const valid = user.password === logInInput.password;
 
     if (!valid) {
       return {
-        errors: [{ field: "password", message: "incorrect password" }],
+        errors: [{ field: "password", message: "Incorrect password" }],
       };
     }
 
     req.session.userId = user.id;
 
-    return {
-      user,
-    };
+    return { user };
+  }
+
+  @Mutation(() => UserResponse)
+  async register(
+    @Arg("input", () => UserNamePasswordInput)
+    input: UserNamePasswordInput,
+    @Ctx() { em }: MyContext
+  ): Promise<UserResponse> {
+    if (!input.username || !input.password) {
+      return {
+        errors: [
+          {
+            field: "username",
+            message: "Username and password are required",
+          },
+        ],
+      };
+    }
+
+    const existingUser = await em.findOne(User, { username: input.username });
+    if (existingUser) {
+      return {
+        errors: [
+          {
+            field: "username",
+            message: "Username already taken",
+          },
+        ],
+      };
+    }
+
+    const user = em.create(User, {
+      username: input.username,
+      password: input.password,
+    });
+
+    await em.persistAndFlush(user);
+
+    return { user };
   }
 
   @Mutation(() => Boolean)

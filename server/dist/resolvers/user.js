@@ -29,62 +29,62 @@ const sendEmail_1 = require("../utils/sendEmail");
 let UserNamePasswordInput = class UserNamePasswordInput {
 };
 __decorate([
-    type_graphql_1.Field(),
+    (0, type_graphql_1.Field)(),
     __metadata("design:type", String)
 ], UserNamePasswordInput.prototype, "username", void 0);
 __decorate([
-    type_graphql_1.Field(),
+    (0, type_graphql_1.Field)(),
     __metadata("design:type", String)
 ], UserNamePasswordInput.prototype, "password", void 0);
 UserNamePasswordInput = __decorate([
-    type_graphql_1.InputType()
+    (0, type_graphql_1.InputType)()
 ], UserNamePasswordInput);
 let EmailInput = class EmailInput {
 };
 __decorate([
-    type_graphql_1.Field(),
+    (0, type_graphql_1.Field)(),
     __metadata("design:type", String)
 ], EmailInput.prototype, "email", void 0);
 __decorate([
-    type_graphql_1.Field(),
+    (0, type_graphql_1.Field)(),
     __metadata("design:type", String)
 ], EmailInput.prototype, "name", void 0);
 __decorate([
-    type_graphql_1.Field(),
+    (0, type_graphql_1.Field)(),
     __metadata("design:type", String)
 ], EmailInput.prototype, "message", void 0);
 EmailInput = __decorate([
-    type_graphql_1.InputType()
+    (0, type_graphql_1.InputType)()
 ], EmailInput);
 let FieldError = class FieldError {
 };
 __decorate([
-    type_graphql_1.Field(),
+    (0, type_graphql_1.Field)(),
     __metadata("design:type", String)
 ], FieldError.prototype, "field", void 0);
 __decorate([
-    type_graphql_1.Field(),
+    (0, type_graphql_1.Field)(),
     __metadata("design:type", String)
 ], FieldError.prototype, "message", void 0);
 FieldError = __decorate([
-    type_graphql_1.ObjectType()
+    (0, type_graphql_1.ObjectType)()
 ], FieldError);
 let UserResponse = class UserResponse {
 };
 __decorate([
-    type_graphql_1.Field(() => [FieldError], { nullable: true }),
+    (0, type_graphql_1.Field)(() => [FieldError], { nullable: true }),
     __metadata("design:type", Array)
 ], UserResponse.prototype, "errors", void 0);
 __decorate([
-    type_graphql_1.Field(() => User_entity_1.User, { nullable: true }),
+    (0, type_graphql_1.Field)(() => User_entity_1.User, { nullable: true }),
     __metadata("design:type", User_entity_1.User)
 ], UserResponse.prototype, "user", void 0);
 UserResponse = __decorate([
-    type_graphql_1.ObjectType()
+    (0, type_graphql_1.ObjectType)()
 ], UserResponse);
 let UserResolver = class UserResolver {
-    me({ req, em }) {
-        return __awaiter(this, void 0, void 0, function* () {
+    me(_a) {
+        return __awaiter(this, arguments, void 0, function* ({ req, em }) {
             if (!req.session.userId) {
                 return null;
             }
@@ -92,8 +92,8 @@ let UserResolver = class UserResolver {
             return user;
         });
     }
-    login(logInInput, { em, req }) {
-        return __awaiter(this, void 0, void 0, function* () {
+    login(logInInput_1, _a) {
+        return __awaiter(this, arguments, void 0, function* (logInInput, { em, req }) {
             const user = em.create(User_entity_1.User, {
                 username: process.env.LOG_IN_USERNAME,
                 password: process.env.LOG_IN_PASSWORD,
@@ -122,8 +122,8 @@ let UserResolver = class UserResolver {
             };
         });
     }
-    logout({ req, res }) {
-        return __awaiter(this, void 0, void 0, function* () {
+    logout(_a) {
+        return __awaiter(this, arguments, void 0, function* ({ req, res }) {
             return new Promise((resolve) => req.session.destroy((err) => {
                 res.clearCookie(constants_1.COOKIE_NAME);
                 if (err) {
@@ -143,42 +143,42 @@ let UserResolver = class UserResolver {
             if (!emailInput.message) {
                 throw new Error("You must enter a message");
             }
-            yield sendEmail_1.sendEmail(emailInput.email, emailInput.name, emailInput.message);
+            yield (0, sendEmail_1.sendEmail)(emailInput.email, emailInput.name, emailInput.message);
             return true;
         });
     }
 };
+exports.UserResolver = UserResolver;
 __decorate([
-    type_graphql_1.Query(() => User_entity_1.User, { nullable: true }),
-    __param(0, type_graphql_1.Ctx()),
+    (0, type_graphql_1.Query)(() => User_entity_1.User, { nullable: true }),
+    __param(0, (0, type_graphql_1.Ctx)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "me", null);
 __decorate([
-    type_graphql_1.Mutation(() => UserResponse),
-    __param(0, type_graphql_1.Arg("logInInput", () => UserNamePasswordInput)),
-    __param(1, type_graphql_1.Ctx()),
+    (0, type_graphql_1.Mutation)(() => UserResponse),
+    __param(0, (0, type_graphql_1.Arg)("logInInput", () => UserNamePasswordInput)),
+    __param(1, (0, type_graphql_1.Ctx)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [UserNamePasswordInput, Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "login", null);
 __decorate([
-    type_graphql_1.Mutation(() => Boolean),
-    __param(0, type_graphql_1.Ctx()),
+    (0, type_graphql_1.Mutation)(() => Boolean),
+    __param(0, (0, type_graphql_1.Ctx)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "logout", null);
 __decorate([
-    type_graphql_1.Mutation(() => Boolean),
-    __param(0, type_graphql_1.Arg("emailInput", () => EmailInput)),
+    (0, type_graphql_1.Mutation)(() => Boolean),
+    __param(0, (0, type_graphql_1.Arg)("emailInput", () => EmailInput)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [EmailInput]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "sendEmail", null);
-UserResolver = __decorate([
-    type_graphql_1.Resolver()
+exports.UserResolver = UserResolver = __decorate([
+    (0, type_graphql_1.Resolver)()
 ], UserResolver);
-exports.UserResolver = UserResolver;
 //# sourceMappingURL=user.js.map

@@ -38,7 +38,6 @@
     "mikro-orm": "^4.5.5",
     "nodemailer": "^6.6.1",
     "reflect-metadata": "^0.1.13",
-    "ts-node": "^9.1.1",
     "type-graphql": "^1.1.1"
   },
   "mikro-orm": {
@@ -54,6 +53,9 @@
     "@types/dotenv": "^8.2.0",
     "@types/express-session": "^1.17.3",
     "@types/nodemailer": "^6.4.2",
-    "@types/redis": "^2.8.29"
+    "@types/redis": "^2.8.29",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
   }
 }

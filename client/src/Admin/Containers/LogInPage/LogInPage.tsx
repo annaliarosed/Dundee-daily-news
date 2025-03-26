@@ -57,7 +57,7 @@ const LogInPage = () => {
 
       await refetch();
       history.push("/admin");
-    } catch (error) {
+    } catch (error: any) {
       console.log(error.message);
       return <div>{error.message}</div>;
     }
