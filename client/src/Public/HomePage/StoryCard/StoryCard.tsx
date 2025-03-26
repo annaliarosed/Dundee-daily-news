@@ -11,31 +11,35 @@ interface StoryCardProps {
   story: StoryType;
 }
 
-const StoryCard: React.FC<StoryCardProps> = ({ story }) => (
-  <Stack className={styles.wrapper} gap={3}>
-    <Link tabIndex={-1} key={story.id} to={`/story/${story.id}`}>
-      <button className={styles.photoWrapper}>
-        <div
-          title={story.altText}
-          className={styles.photo}
-          style={{
-            backgroundImage: `url(${story.imgUrls[0] && story.imgUrls[0]})`,
-          }}
-        />
+const StoryCard: React.FC<StoryCardProps> = ({ story }) => {
+  console.log("story", story);
 
-        <div className={cn(styles.photoBackground, styles[story.town])} />
-      </button>
-    </Link>
+  return (
+    <Stack className={styles.wrapper} gap={3}>
+      <Link tabIndex={-1} key={story.id} to={`/story/${story.id}`}>
+        <button className={styles.photoWrapper}>
+          <div
+            title={story.altText}
+            className={styles.photo}
+            style={{
+              backgroundImage: `url(${story.imgUrls[0] && story.imgUrls[0]})`,
+            }}
+          />
 
-    <Stack direction="vertical" align="flex-start" justify="center">
-      <h3>{story.head}</h3>
-      <p className={styles.date}>
-        {moment(Number(story.createdAt)).format("MMMM D, YYYY")}
-      </p>
+          <div className={cn(styles.photoBackground, styles[story.town])} />
+        </button>
+      </Link>
 
-      <TownLozenge tabIndex={0} town={story.town} />
+      <Stack direction="vertical" align="flex-start" justify="center">
+        <h3>{story.head}</h3>
+        <p className={styles.date}>
+          {moment(Number(story.createdAt)).format("MMMM D, YYYY")}
+        </p>
+
+        <TownLozenge tabIndex={0} town={story.town} />
+      </Stack>
     </Stack>
-  </Stack>
-);
+  );
+};
 
 export default StoryCard;

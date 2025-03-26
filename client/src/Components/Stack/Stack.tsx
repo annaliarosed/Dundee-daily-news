@@ -4,7 +4,7 @@ import styles from "./Stack.module.scss";
 
 export const StackScale = [0, 1, 2, 3, 4, 5, 6, 7, 8] as const;
 
-type StackScaleType = typeof StackScale[number];
+type StackScaleType = (typeof StackScale)[number];
 
 export interface StackProps extends React.HTMLAttributes<HTMLDivElement> {
   tabIndex?: number;

@@ -11,7 +11,11 @@ const HomePageFooter = () => (
     <div className={styles.body}>
       <Stack justify="space-between" className={styles.townWrapper}>
         {TownTypesOptions.map((town) => (
-          <Link tabIndex={-1} to={`/neighborhood/${town.value}`}>
+          <Link
+            key={town.value}
+            tabIndex={-1}
+            to={`/neighborhood/${town.value}`}
+          >
             <button tabIndex={0} className={styles.townLink}>
               {town.label}
             </button>

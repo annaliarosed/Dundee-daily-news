@@ -54,10 +54,13 @@ const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
           className={styles.navWrapper}
         >
           <Stack direction="vertical">
-            {navOptions.map((nav) => {
+            {navOptions.map((nav, idx) => {
               if (nav.value === "neighborhood") {
                 return (
-                  <Stack className={styles.subMenusWrapper}>
+                  <Stack
+                    key={`${nav.label}-${idx}`}
+                    className={styles.subMenusWrapper}
+                  >
                     <div className={styles.neighborhood}>
                       <Link tabIndex={-1} to={`${nav.value}`}>
                         <Stack align="center" className={styles.navItem}>
@@ -147,7 +150,11 @@ const Menu: React.FC<MenuProps> = ({ isOpen, closeMenu }) => {
               }
 
               return (
-                <Link tabIndex={-1} to={`${nav.value}`}>
+                <Link
+                  tabIndex={-1}
+                  to={`${nav.value}`}
+                  key={`${nav.label}-${idx}`}
+                >
                   <Stack align="center" className={styles.navItem}>
                     <button
                       className={styles.largeButton}

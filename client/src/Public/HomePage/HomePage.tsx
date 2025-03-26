@@ -35,14 +35,14 @@ const HomePage = () => {
 
         <Stack direction="vertical" className={styles.storyCards}>
           {sortedStories.slice(1, 7).map((story, index) => (
-            <>
+            <span key={story.id}>
               <StoryCard story={story} />
               <div
                 className={cn(styles.bottomBorder, {
                   [styles.last]: index === 5,
                 })}
               />
-            </>
+            </span>
           ))}
         </Stack>
       </div>
